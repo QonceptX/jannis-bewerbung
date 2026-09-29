@@ -1623,3 +1623,58 @@ h1{
     margin:0!important;
   }
 }
+
+
+/* === EXPERIENCE BADGE V2 · sichtbar groß auf allen Viewports === */
+.experience{
+  padding:20px 23px 18px!important;
+  min-width:138px!important;
+}
+
+.experience strong{
+  font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+  font-size:52px!important;
+  line-height:.86!important;
+  font-weight:800!important;
+  letter-spacing:-1px!important;
+}
+
+.experience span{
+  display:block!important;
+  margin-top:10px!important;
+  font-size:10px!important;
+  line-height:1.1!important;
+  font-weight:800!important;
+  letter-spacing:1.15px!important;
+}
+
+@media(max-width:900px){
+  .experience{
+    padding:18px 20px 16px!important;
+    min-width:124px!important;
+  }
+
+  .experience strong{
+    font-size:46px!important;
+  }
+
+  .experience span{
+    font-size:9px!important;
+  }
+}
+
+@media(max-width:680px){
+  .experience{
+    left:-10px!important;
+    padding:16px 18px 14px!important;
+    min-width:112px!important;
+  }
+
+  .experience strong{
+    font-size:40px!important;
+  }
+
+  .experience span{
+    font-size:8.5px!important;
+  }
+}
