@@ -633,3 +633,87 @@ body.timeline-locked{
     max-width:220px!important;
   }
 }
+
+
+/* === TIMELINE FINAL V7 · kompakte Sektion + stabiler Lock === */
+html.timeline-locked,
+body.timeline-locked{
+  overflow:hidden!important;
+  overscroll-behavior:none!important;
+}
+
+body.timeline-locked{
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+}
+
+@media (min-width:901px){
+  .application>section.journey{
+    margin-top:18px!important;
+    margin-bottom:18px!important;
+  }
+
+  .journey{
+    min-height:auto!important;
+    height:auto!important;
+    padding:22px 28px 12px!important;
+    display:block!important;
+  }
+
+  .journey-heading{
+    max-width:620px!important;
+  }
+
+  .journey-heading h2{
+    font-size:34px!important;
+    line-height:1!important;
+    margin:6px 0 6px!important;
+  }
+
+  .journey-heading p{
+    font-size:13px!important;
+    line-height:1.45!important;
+    margin:0 0 12px!important;
+  }
+
+  .journey .timeline{
+    position:relative!important;
+    top:auto!important;
+    padding:2px 0 0!important;
+    margin:0!important;
+  }
+
+  .journey .timeline::before,
+  .journey .timeline::after{
+    top:var(--rail-y)!important;
+    transform:translateY(-50%)!important;
+  }
+
+  .journey .timeline-year{
+    height:26px!important;
+    font-size:21px!important;
+  }
+
+  .journey .timeline-dot{
+    margin:7px auto 10px!important;
+  }
+
+  .journey .timeline h3{
+    font-size:15px!important;
+    margin:0 auto 4px!important;
+  }
+
+  .journey .timeline p{
+    font-size:11.5px!important;
+    line-height:1.42!important;
+    max-width:215px!important;
+    margin:0 auto!important;
+  }
+
+  .journey .timeline article,
+  .journey .timeline article+article{
+    padding:0 14px!important;
+  }
+}
