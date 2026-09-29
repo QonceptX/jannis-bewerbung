@@ -908,3 +908,55 @@ h1{
     font-size:14px!important;
   }
 }
+
+
+/* === TYPOGRAFIE V2 · feste Hierarchie ohne Größenchaos === */
+@media (min-width:901px){
+  /* große Abschnittstitel: überall exakt gleich */
+  .journey-heading h2,
+  .why-now h2,
+  .bars-intro h2,
+  .closing-cta h2{
+    font-family:Manrope,Arial,sans-serif!important;
+    font-size:36px!important;
+    font-weight:800!important;
+    line-height:1.10!important;
+    letter-spacing:-1.25px!important;
+    font-style:normal!important;
+  }
+
+  /* kleine Rubrikzeilen: überall exakt gleich */
+  .journey-heading>.index,
+  .why-now .question,
+  .bars-intro>.index,
+  .closing-cta>.index,
+  .fit .index,
+  .closing .index{
+    font-family:Manrope,Arial,sans-serif!important;
+    font-size:11px!important;
+    font-weight:800!important;
+    line-height:1.2!important;
+    letter-spacing:1.45px!important;
+  }
+
+  /* Fließtext unter großen Überschriften */
+  .journey-heading p,
+  .why-now p,
+  .closing-cta p{
+    font-family:Manrope,Arial,sans-serif!important;
+    font-size:15px!important;
+    font-weight:400!important;
+    line-height:1.62!important;
+    letter-spacing:-.12px!important;
+  }
+
+  /* Inhaltsüberschriften innerhalb der Seite */
+  .fit h2,
+  .note-body h2{
+    font-family:Manrope,Arial,sans-serif!important;
+    font-size:25px!important;
+    font-weight:800!important;
+    line-height:1.14!important;
+    letter-spacing:-.7px!important;
+  }
+}
