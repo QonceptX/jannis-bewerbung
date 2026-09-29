@@ -1339,6 +1339,120 @@
     font-size:5.5pt!important;
   }
 }
+</style><style id="final-photo-caption-v56">
+.portrait-caption-application{
+  display:block!important;
+  margin:0!important;
+  padding:18px 0 4px!important;
+  border:0!important;
+  background:transparent!important;
+}
+
+.portrait-caption-application p{
+  display:grid!important;
+  grid-template-columns:auto minmax(0,1fr)!important;
+  grid-template-areas:
+    "tag title"
+    "tag sub"!important;
+  column-gap:14px!important;
+  row-gap:3px!important;
+
+  margin:0!important;
+  min-width:0!important;
+}
+
+.portrait-caption-application .polo-kicker{
+  grid-area:tag!important;
+  align-self:center!important;
+
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+
+  min-width:auto!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+
+  color:var(--cyan)!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:10px!important;
+  line-height:1.2!important;
+  font-weight:800!important;
+  letter-spacing:1.35px!important;
+  white-space:nowrap!important;
+}
+
+.portrait-caption-application strong{
+  grid-area:title!important;
+  display:block!important;
+
+  margin:0!important;
+
+  color:#dfe8ea!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:14px!important;
+  line-height:1.35!important;
+  font-weight:600!important;
+}
+
+.portrait-caption-application .polo-subline{
+  grid-area:sub!important;
+  display:block!important;
+
+  margin:0!important;
+
+  color:#7f969d!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:11px!important;
+  line-height:1.45!important;
+  font-weight:400!important;
+}
+
+.portrait-caption-application::before,
+.portrait-caption-application::after{
+  content:none!important;
+  display:none!important;
+}
+
+@media(max-width:680px){
+  .portrait-caption-application{
+    padding-top:14px!important;
+  }
+
+  .portrait-caption-application p{
+    grid-template-columns:1fr!important;
+    grid-template-areas:
+      "tag"
+      "title"
+      "sub"!important;
+    row-gap:5px!important;
+  }
+
+  .portrait-caption-application .polo-kicker{
+    justify-self:start!important;
+    font-size:9px!important;
+  }
+
+  .portrait-caption-application strong{
+    font-size:13px!important;
+  }
+
+  .portrait-caption-application .polo-subline{
+    font-size:11px!important;
+    line-height:1.45!important;
+  }
+}
+
+@media print{
+  .portrait-caption-application{
+    display:none!important;
+  }
+}
 </style></head>
 <body>
 <main class="application">
@@ -1360,11 +1474,13 @@
     <span class="experience-kicker">SEIT</span>
     <strong>1998</strong>
     <span class="experience-caption">IM HANDWERK</span>
-  </div></div><div class="portrait-caption"><p>
-    <span class="polo-kicker">DETAIL</span>
-    <strong>Express-Service-Stickerei am Polo</strong>
-    <span class="polo-subline">digital ergänzt · im Detail ansehen</span>
-  </p><button class="zoom-toggle" type="button" popovertarget="stitch-detail" aria-label="Stickerei anschauen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6M10 7v6M7 10h6"/></svg><span>Detail ansehen</span></button></div><div class="stitch-detail" id="stitch-detail" popover><div class="detail-head"><strong>Steckt Liebe im Detail.</strong><button type="button" class="zoom-close" popovertarget="stitch-detail" popovertargetaction="hide" aria-label="Vergrößerung schließen">—</button></div><div class="stitch-crop" role="img" aria-label="Vergrößerte Ansicht der digital ergänzten Logostickerei"></div><p>Die Stickerei ist digital. Die Erfahrung ist echt.</p></div></div>
+  </div></div><div class="portrait-caption portrait-caption-application">
+    <p>
+      <span class="polo-kicker">MITGEDACHT BIS INS DETAIL</span>
+      <strong>Das Express-Service-Logo auf dem Polo ist digital ergänzt.</strong>
+      <span class="polo-subline">Nicht, weil ich schon Mitarbeiter bin – sondern weil ich mir gut vorstellen kann, einer zu werden.</span>
+    </p>
+  </div></div>
 </section>
 <section class="journey" id="lebenslauf" aria-label="Mein Lebenslauf"><div class="journey-heading">
     <div class="journey-copy">
