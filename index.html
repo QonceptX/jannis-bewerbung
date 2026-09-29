@@ -19,140 +19,164 @@ portrait.addEventListener('pointerleave',()=>{portrait.style.setProperty('--rx',
 const journey=document.querySelector('.journey');
 const timeline=document.querySelector('.timeline');
 const timelineItems=[...document.querySelectorAll('.timeline article')];
+const timelineDots=[...document.querySelectorAll('.timeline-dot')];
 
-if(journey&&timeline&&timelineItems.length){
+if(journey&&timeline&&timelineItems.length&&timelineDots.length){
   const desktop=window.matchMedia('(min-width: 901px)');
   let step=-1;
-  let wheelSum=0;
   let wheelLocked=false;
-  let releasedDown=false;
+  let lockActive=false;
+  let savedY=0;
+  let touchStartY=null;
+
+  const getDotCenters=()=>{
+    const tr=timeline.getBoundingClientRect();
+    return timelineDots.map(dot=>{
+      const r=dot.getBoundingClientRect();
+      return r.left-tr.left+r.width/2;
+    });
+  };
 
   const renderStep=()=>{
-    const progress=step<0?0:step/(timelineItems.length-1);
-    timeline.style.setProperty('--timeline-progress',progress.toFixed(4));
+    const centers=getDotCenters();
+    if(centers.length>=2){
+      const first=centers[0];
+      const last=centers[centers.length-1];
+      const progress=step<0?0:step/(timelineItems.length-1);
+      const endX=first+(last-first)*progress;
+      timeline.style.setProperty('--rail-left',first+'px');
+      timeline.style.setProperty('--rail-width',(last-first)+'px');
+      timeline.style.setProperty('--laser-width',Math.max(0,endX-first)+'px');
+    }
+
     timelineItems.forEach((item,i)=>{
       item.classList.toggle('is-passed',step>=0&&i<step);
       item.classList.toggle('is-active',i===step);
     });
   };
 
-  const isPinned=()=>{
-    if(!desktop.matches) return false;
-    const r=journey.getBoundingClientRect();
-    const pinTop=110;
-    return r.top<=pinTop+2 && r.bottom>window.innerHeight*0.72;
+  const lockPage=()=>{
+    if(lockActive||!desktop.matches) return;
+    lockActive=true;
+    savedY=window.scrollY;
+    document.documentElement.classList.add('timeline-locked');
+    document.body.classList.add('timeline-locked');
+    document.body.style.top=(-savedY)+'px';
+    renderStep();
   };
 
-  const snapToJourney=()=>{
-    if(!desktop.matches) return;
+  const unlockPage=()=>{
+    if(!lockActive) return;
+    document.documentElement.classList.remove('timeline-locked');
+    document.body.classList.remove('timeline-locked');
+    document.body.style.top='';
+    window.scrollTo(0,savedY);
+    lockActive=false;
+  };
+
+  const enterTimelineIfNeeded=()=>{
+    if(!desktop.matches||lockActive) return;
     const r=journey.getBoundingClientRect();
-    if(r.top<110 && r.top>-120){
-      window.scrollBy({top:r.top-110,behavior:'auto'});
+    const trigger=window.innerHeight*0.28;
+    if(r.top<=trigger && r.bottom>window.innerHeight*0.72){
+      const targetY=window.scrollY+r.top-70;
+      window.scrollTo({top:targetY,behavior:'auto'});
+      savedY=targetY;
+      if(step<0) step=0;
+      lockPage();
     }
   };
+
+  const advance=(direction)=>{
+    if(direction>0){
+      if(step<timelineItems.length-1){
+        step++;
+        renderStep();
+        return true;
+      }
+      unlockPage();
+      const next=journey.nextElementSibling;
+      if(next){
+        const top=next.getBoundingClientRect().top+window.scrollY-24;
+        window.scrollTo({top,behavior:'smooth'});
+      }
+      return false;
+    }else{
+      if(step>0){
+        step--;
+        renderStep();
+        return true;
+      }
+      unlockPage();
+      const prevY=Math.max(0,journey.offsetTop-window.innerHeight*.45);
+      window.scrollTo({top:prevY,behavior:'smooth'});
+      step=-1;
+      renderStep();
+      return false;
+    }
+  };
+
+  window.addEventListener('scroll',()=>{
+    if(!lockActive) enterTimelineIfNeeded();
+  },{passive:true});
 
   window.addEventListener('wheel',event=>{
     if(!desktop.matches) return;
 
-    if(!isPinned()){
-      if(journey.getBoundingClientRect().top>110){
-        step=-1;
-        releasedDown=false;
-        renderStep();
-      }
-      return;
+    if(!lockActive){
+      enterTimelineIfNeeded();
+      if(!lockActive) return;
     }
+
+    event.preventDefault();
+    if(wheelLocked) return;
 
     const direction=Math.sign(event.deltaY);
     if(direction===0) return;
 
-    if(direction<0 && step<0){
-      return;
-    }
-    if(direction>0 && step===timelineItems.length-1 && releasedDown){
-      return;
-    }
-
-    event.preventDefault();
-
-    wheelSum+=event.deltaY;
-    if(Math.abs(wheelSum)<38 || wheelLocked) return;
-
     wheelLocked=true;
-    const down=wheelSum>0;
-    wheelSum=0;
-
-    if(down){
-      if(step<timelineItems.length-1){
-        step++;
-        releasedDown=false;
-        renderStep();
-        snapToJourney();
-      }else{
-        releasedDown=true;
-        const next=journey.nextElementSibling;
-        if(next){
-          const top=next.getBoundingClientRect().top+window.scrollY-26;
-          window.scrollTo({top,behavior:'smooth'});
-        }
-      }
-    }else{
-      releasedDown=false;
-      if(step>0){
-        step--;
-        renderStep();
-        snapToJourney();
-      }else if(step===0){
-        step=-1;
-        renderStep();
-        const previousTop=journey.offsetTop-window.innerHeight*.45;
-        window.scrollTo({top:Math.max(0,previousTop),behavior:'smooth'});
-      }
-    }
-
-    window.setTimeout(()=>{wheelLocked=false;},360);
+    advance(direction);
+    window.setTimeout(()=>{wheelLocked=false;},420);
   },{passive:false});
 
   window.addEventListener('keydown',event=>{
-    if(!desktop.matches||!isPinned()) return;
-    if(!['ArrowDown','PageDown',' ','ArrowUp','PageUp'].includes(event.key)) return;
-
+    if(!desktop.matches) return;
     const down=['ArrowDown','PageDown',' '].includes(event.key);
-    if(down && step===timelineItems.length-1 && releasedDown) return;
-    if(!down && step<0) return;
+    const up=['ArrowUp','PageUp'].includes(event.key);
+    if(!down&&!up) return;
+
+    if(!lockActive){
+      enterTimelineIfNeeded();
+      if(!lockActive) return;
+    }
 
     event.preventDefault();
+    advance(down?1:-1);
+  });
 
-    if(down){
-      if(step<timelineItems.length-1){
-        step++;
-        releasedDown=false;
-        renderStep();
-      }else{
-        releasedDown=true;
-        const next=journey.nextElementSibling;
-        if(next){
-          const top=next.getBoundingClientRect().top+window.scrollY-26;
-          window.scrollTo({top,behavior:'smooth'});
-        }
-      }
-    }else{
-      releasedDown=false;
-      if(step>0){
-        step--;
-        renderStep();
-      }else{
-        step=-1;
-        renderStep();
-      }
-    }
+  window.addEventListener('touchstart',event=>{
+    if(!desktop.matches||!lockActive) return;
+    touchStartY=event.touches[0].clientY;
+  },{passive:true});
+
+  window.addEventListener('touchmove',event=>{
+    if(!desktop.matches||!lockActive||touchStartY===null) return;
+    event.preventDefault();
+  },{passive:false});
+
+  window.addEventListener('touchend',event=>{
+    if(!desktop.matches||!lockActive||touchStartY===null) return;
+    const endY=event.changedTouches[0].clientY;
+    const diff=touchStartY-endY;
+    touchStartY=null;
+    if(Math.abs(diff)>24) advance(diff>0?1:-1);
   });
 
   window.addEventListener('resize',renderStep);
   if(desktop.addEventListener){
     desktop.addEventListener('change',()=>{
+      unlockPage();
       step=desktop.matches?-1:timelineItems.length-1;
-      releasedDown=false;
       renderStep();
     });
   }
