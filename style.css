@@ -573,3 +573,63 @@ body.timeline-locked{
     margin-bottom:0!important;
   }
 }
+
+
+/* === TIMELINE FINAL V6 · kompakter Block === */
+@media (min-width:901px){
+  .application>section.journey{
+    margin-top:24px!important;
+    margin-bottom:24px!important;
+  }
+
+  .journey{
+    min-height:0!important;
+    padding:28px 30px 18px!important;
+  }
+
+  .journey-heading{
+    max-width:650px!important;
+  }
+
+  .journey-heading h2{
+    font-size:36px!important;
+    line-height:1!important;
+    margin:8px 0 8px!important;
+  }
+
+  .journey-heading p{
+    font-size:14px!important;
+    line-height:1.55!important;
+    margin-bottom:18px!important;
+  }
+
+  .journey .timeline{
+    padding:6px 0 0!important;
+  }
+
+  .journey .timeline-year{
+    height:28px!important;
+    font-size:22px!important;
+  }
+
+  .journey .timeline-year small{
+    margin-top:4px!important;
+    font-size:8px!important;
+  }
+
+  .journey .timeline-dot{
+    margin:9px auto 12px!important;
+  }
+
+  .journey .timeline h3{
+    font-size:16px!important;
+    line-height:1.25!important;
+    margin-bottom:5px!important;
+  }
+
+  .journey .timeline p{
+    font-size:12px!important;
+    line-height:1.5!important;
+    max-width:220px!important;
+  }
+}
