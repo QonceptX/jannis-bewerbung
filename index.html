@@ -24,173 +24,166 @@ const timelineDots=[...document.querySelectorAll('.timeline-dot')];
 if(journey&&timeline&&timelineItems.length&&timelineDots.length){
   const desktop=window.matchMedia('(min-width: 901px)');
   let step=-1;
-  let wheelLocked=false;
-  let lockActive=false;
-  let savedY=0;
-  let bypassLock=false;
+  let locked=false;
+  let wheelCooldown=false;
+  let lockScrollY=0;
+  let ignoreAutoLockUntil=0;
 
-  const getDotGeometry=()=>{
+  const now=()=>Date.now();
+
+  const setRailGeometry=()=>{
     const tr=timeline.getBoundingClientRect();
-    return timelineDots.map(dot=>{
+    const points=timelineDots.map(dot=>{
       const r=dot.getBoundingClientRect();
       return {
         x:r.left-tr.left+r.width/2,
         y:r.top-tr.top+r.height/2
       };
     });
+
+    if(points.length<2) return;
+
+    const first=points[0].x;
+    const last=points[points.length-1].x;
+    const railY=points.reduce((sum,p)=>sum+p.y,0)/points.length;
+    const progress=step<0?0:step/(timelineItems.length-1);
+
+    timeline.style.setProperty('--rail-left',first+'px');
+    timeline.style.setProperty('--rail-width',(last-first)+'px');
+    timeline.style.setProperty('--laser-width',((last-first)*progress)+'px');
+    timeline.style.setProperty('--rail-y',railY+'px');
   };
 
-  const renderStep=()=>{
-    const points=getDotGeometry();
-    if(points.length>=2){
-      const first=points[0].x;
-      const last=points[points.length-1].x;
-      const railY=points.reduce((sum,p)=>sum+p.y,0)/points.length;
-      const progress=step<0?0:step/(timelineItems.length-1);
-      const endX=first+(last-first)*progress;
-      timeline.style.setProperty('--rail-left',first+'px');
-      timeline.style.setProperty('--rail-width',(last-first)+'px');
-      timeline.style.setProperty('--laser-width',Math.max(0,endX-first)+'px');
-      timeline.style.setProperty('--rail-y',railY+'px');
-    }
-
+  const render=()=>{
+    setRailGeometry();
     timelineItems.forEach((item,i)=>{
       item.classList.toggle('is-passed',step>=0&&i<step);
       item.classList.toggle('is-active',i===step);
     });
   };
 
-  const lockPage=()=>{
-    if(lockActive||!desktop.matches||bypassLock) return;
-    lockActive=true;
-    savedY=window.scrollY;
+  const freezeAt=(y)=>{
+    lockScrollY=y;
+    locked=true;
     document.documentElement.classList.add('timeline-locked');
     document.body.classList.add('timeline-locked');
-    document.body.style.top=(-savedY)+'px';
-    renderStep();
+    document.body.style.top=(-y)+'px';
   };
 
-  const unlockPage=()=>{
-    if(!lockActive) return;
+  const unfreeze=()=>{
+    if(!locked) return;
     document.documentElement.classList.remove('timeline-locked');
     document.body.classList.remove('timeline-locked');
     document.body.style.top='';
-    lockActive=false;
-    window.scrollTo(0,savedY);
+    locked=false;
+    window.scrollTo(0,lockScrollY);
   };
 
-  const enterTimelineIfNeeded=()=>{
-    if(!desktop.matches||lockActive||bypassLock) return;
+  const shouldEnter=()=>{
+    if(!desktop.matches || locked || now()<ignoreAutoLockUntil) return false;
     const r=journey.getBoundingClientRect();
-    const trigger=window.innerHeight*.34;
-
-    if(r.top<=trigger && r.bottom>trigger+120){
-      const targetY=Math.max(0,window.scrollY+r.top-54);
-      window.scrollTo({top:targetY,behavior:'auto'});
-      savedY=targetY;
-      if(step<0) step=0;
-      lockPage();
-    }
+    const trigger=window.innerHeight*.30;
+    return r.top<=trigger && r.bottom>trigger+80;
   };
 
-  const leaveTimelineDown=()=>{
-    bypassLock=true;
-    unlockPage();
+  const enter=()=>{
+    if(!shouldEnter()) return;
+    const r=journey.getBoundingClientRect();
+    const targetY=Math.max(0,window.scrollY+r.top-42);
+    window.scrollTo(0,targetY);
+    step=0;
+    render();
+    freezeAt(targetY);
+  };
 
+  const leaveDown=()=>{
+    ignoreAutoLockUntil=now()+1200;
+    unfreeze();
     const next=journey.nextElementSibling;
     if(next){
-      const top=next.getBoundingClientRect().top+window.scrollY-22;
+      const top=next.getBoundingClientRect().top+window.scrollY-18;
       window.scrollTo({top,behavior:'smooth'});
     }
-
-    window.setTimeout(()=>{
-      bypassLock=false;
-    },900);
   };
 
-  const leaveTimelineUp=()=>{
-    bypassLock=true;
-    unlockPage();
+  const leaveUp=()=>{
+    ignoreAutoLockUntil=now()+1200;
+    unfreeze();
     step=-1;
-    renderStep();
-
-    const top=Math.max(0,journey.offsetTop-window.innerHeight*.45);
+    render();
+    const top=Math.max(0,journey.offsetTop-window.innerHeight*.55);
     window.scrollTo({top,behavior:'smooth'});
-
-    window.setTimeout(()=>{
-      bypassLock=false;
-    },900);
   };
 
-  const advance=(direction)=>{
-    if(direction>0){
+  const move=(dir)=>{
+    if(dir>0){
       if(step<timelineItems.length-1){
         step++;
-        renderStep();
+        render();
       }else{
-        leaveTimelineDown();
+        leaveDown();
       }
     }else{
       if(step>0){
         step--;
-        renderStep();
+        render();
       }else{
-        leaveTimelineUp();
+        leaveUp();
       }
     }
   };
 
   window.addEventListener('scroll',()=>{
-    if(!lockActive) enterTimelineIfNeeded();
+    if(!locked) enter();
   },{passive:true});
 
   window.addEventListener('wheel',event=>{
     if(!desktop.matches) return;
 
-    if(!lockActive){
-      enterTimelineIfNeeded();
-      if(!lockActive) return;
+    if(!locked){
+      enter();
+      if(!locked) return;
     }
 
     event.preventDefault();
-    if(wheelLocked) return;
+    if(wheelCooldown) return;
 
-    const direction=Math.sign(event.deltaY);
-    if(direction===0) return;
+    const dir=Math.sign(event.deltaY);
+    if(!dir) return;
 
-    wheelLocked=true;
-    advance(direction);
-    window.setTimeout(()=>{wheelLocked=false;},360);
+    wheelCooldown=true;
+    move(dir);
+    setTimeout(()=>{wheelCooldown=false;},320);
   },{passive:false});
 
   window.addEventListener('keydown',event=>{
     if(!desktop.matches) return;
+
     const down=['ArrowDown','PageDown',' '].includes(event.key);
-    const up=['ArrowUp','PageUp'].includes(event.key);
+    const up=['ArrowUp','PageUp','Home'].includes(event.key);
     if(!down&&!up) return;
 
-    if(!lockActive){
-      enterTimelineIfNeeded();
-      if(!lockActive) return;
+    if(!locked){
+      enter();
+      if(!locked) return;
     }
 
     event.preventDefault();
-    advance(down?1:-1);
+    move(down?1:-1);
   });
 
-  window.addEventListener('resize',renderStep);
+  window.addEventListener('resize',render);
 
   if(desktop.addEventListener){
     desktop.addEventListener('change',()=>{
-      bypassLock=true;
-      unlockPage();
+      ignoreAutoLockUntil=now()+500;
+      unfreeze();
       step=desktop.matches?-1:timelineItems.length-1;
-      renderStep();
-      window.setTimeout(()=>{bypassLock=false;},250);
+      render();
     });
   }
 
   if(!desktop.matches) step=timelineItems.length-1;
-  renderStep();
+  render();
 }
 </script></body></html>
