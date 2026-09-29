@@ -18,22 +18,21 @@ portrait.addEventListener('pointerleave',()=>{portrait.style.setProperty('--rx',
 
 const journey=document.querySelector('.journey');
 const timeline=document.querySelector('.timeline');
-const timelineDots=[...document.querySelectorAll('.timeline-dot')];
-if(journey&&timeline&&timelineDots.length){
+const timelineItems=[...document.querySelectorAll('.timeline article')];
+if(journey&&timeline&&timelineItems.length){
   const updateTimeline=()=>{
-    const jr=journey.getBoundingClientRect();
-    const progress=Math.max(0,Math.min(1,(window.innerHeight-jr.top)/(window.innerHeight+jr.height)));
-    const timelineRect=timeline.getBoundingClientRect();
-    const centers=timelineDots.map(dot=>{const r=dot.getBoundingClientRect();return r.left-timelineRect.left+r.width/2;});
-    const scaled=progress*(centers.length-1);
-    const segment=Math.min(centers.length-2,Math.floor(scaled));
-    const local=Math.max(0,Math.min(1,scaled-segment));
-    const start=centers[segment];
-    const width=(centers[segment+1]-start)*local;
-    timeline.style.setProperty('--laser-start',start+'px');
-    timeline.style.setProperty('--laser-width',Math.max(0,width)+'px');
-    const active=Math.min(timelineDots.length-1,Math.floor(progress*timelineDots.length));
-    timelineDots.forEach((dot,i)=>dot.closest('article').classList.toggle('is-active',i===active));
+    const rect=journey.getBoundingClientRect();
+    const startPoint=window.innerHeight*.72;
+    const endPoint=window.innerHeight*.22;
+    const raw=(startPoint-rect.top)/Math.max(rect.height-(startPoint-endPoint),1);
+    const progress=Math.max(0,Math.min(1,raw));
+    timeline.style.setProperty('--timeline-progress',progress.toFixed(4));
+    const scaled=progress*(timelineItems.length-1);
+    const active=Math.min(timelineItems.length-1,Math.max(0,Math.round(scaled)));
+    timelineItems.forEach((item,i)=>{
+      item.classList.toggle('is-passed',i<active);
+      item.classList.toggle('is-active',i===active);
+    });
   };
   addEventListener('scroll',updateTimeline,{passive:true});
   addEventListener('resize',updateTimeline);
