@@ -1441,3 +1441,185 @@ h1{
     font-size:22px!important;
   }
 }
+
+
+/* === DESIGN V6 · Wideformat + klare Größenhierarchie === */
+@media (min-width:901px){
+
+  html,
+  body{
+    background:#131e23!important;
+  }
+
+  .application{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding-left:clamp(46px,5vw,88px)!important;
+    padding-right:clamp(46px,5vw,88px)!important;
+    background:#131e23!important;
+    border-radius:0!important;
+  }
+
+  header{
+    height:76px!important;
+  }
+
+  .intro{
+    grid-template-columns:minmax(0,1.05fr) minmax(430px,.95fr)!important;
+    max-width:1540px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    min-height:540px!important;
+    padding-top:34px!important;
+    padding-bottom:32px!important;
+    gap:clamp(44px,5vw,78px)!important;
+  }
+
+  /* Hero: charakterstark, aber nicht überdimensioniert */
+  h1{
+    font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+    font-size:clamp(72px,6vw,98px)!important;
+    font-weight:800!important;
+    line-height:.90!important;
+    letter-spacing:-.02em!important;
+    margin:0 0 20px!important;
+  }
+
+  .next-line{
+    font-size:22px!important;
+    margin-bottom:18px!important;
+  }
+
+  .next-line strong{
+    font-size:29px!important;
+  }
+
+  .next-line>span{
+    font-size:18px!important;
+  }
+
+  .letter{
+    font-size:13.5px!important;
+    line-height:1.72!important;
+    max-width:520px!important;
+  }
+
+  .visual{
+    min-height:500px!important;
+    width:100%!important;
+    max-width:620px!important;
+    justify-self:end!important;
+  }
+
+  /* "Seit 1998" wieder als echter visueller Anker */
+  .experience{
+    top:24px!important;
+    left:-30px!important;
+    padding:18px 21px 16px!important;
+  }
+
+  .experience strong{
+    font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+    font-size:46px!important;
+    line-height:.88!important;
+    font-weight:800!important;
+    letter-spacing:-.02em!important;
+  }
+
+  .experience span{
+    margin-top:8px!important;
+    font-size:9.5px!important;
+    line-height:1.1!important;
+    font-weight:800!important;
+    letter-spacing:1.1px!important;
+  }
+
+  /* markante weiße Abschnittstitel wieder in Barlow, aber kontrolliert */
+  .journey-heading h2,
+  .why-now h2,
+  .bars-intro h2,
+  .closing-cta h2{
+    font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+    font-size:32px!important;
+    line-height:1.03!important;
+    font-weight:700!important;
+    letter-spacing:-.25px!important;
+  }
+
+  .fit h2,
+  .note-body h2{
+    font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+    font-size:25px!important;
+    line-height:1.08!important;
+    font-weight:700!important;
+  }
+
+  /* Cyan-Rubriken bleiben die Orientierung */
+  .journey-heading>.index,
+  .why-now .question,
+  .bars-intro>.index,
+  .note-top .index,
+  .closing-cta>.index,
+  .fit .index{
+    font-family:Manrope,Arial,sans-serif!important;
+    font-size:13px!important;
+    line-height:1.2!important;
+    font-weight:800!important;
+    letter-spacing:1.55px!important;
+    color:var(--cyan)!important;
+  }
+
+  /* Sektionen breit, aber Inhalt nicht verloren */
+  .journey,
+  .fit,
+  .why-now,
+  .profile-bars,
+  .closing{
+    width:100%!important;
+    max-width:1540px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+
+  .application>section:not(.intro){
+    margin-top:22px!important;
+    margin-bottom:22px!important;
+  }
+
+  .journey{
+    padding:24px 30px 16px!important;
+  }
+
+  .fit,
+  .why-now,
+  .profile-bars{
+    padding:26px 30px!important;
+  }
+
+  .family-note{
+    padding:20px 26px!important;
+  }
+
+  .closing-cta{
+    padding:24px 28px!important;
+  }
+
+  /* Text wieder etwas luftiger als in V5 */
+  .journey-heading p,
+  .why-now p,
+  .closing-cta p,
+  .note-body p,
+  .fit p,
+  .profile-bars .language-note{
+    font-size:13.5px!important;
+    line-height:1.58!important;
+  }
+}
+
+@media (min-width:1500px){
+  .application{
+    border-radius:0!important;
+    margin:0!important;
+  }
+}
