@@ -717,3 +717,194 @@ body.timeline-locked{
     padding:0 14px!important;
   }
 }
+
+
+/* === TYPOGRAFIE V1 · einheitlich, ruhig, gut lesbar === */
+:root{
+  --font-display:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+  --font-ui:Manrope,Arial,sans-serif;
+}
+
+/* Kleine Rubriken überall gleich */
+.edition,
+.role,
+.index,
+.why-now .question,
+.polo-kicker{
+  font-family:var(--font-ui)!important;
+  font-size:11px!important;
+  line-height:1.25!important;
+  font-weight:800!important;
+  letter-spacing:1.45px!important;
+  text-transform:uppercase!important;
+}
+
+/* Hero bleibt bewusst plakativ */
+h1{
+  font-family:var(--font-display)!important;
+  font-weight:800!important;
+  letter-spacing:-.025em!important;
+}
+
+/* Alle normalen Überschriften sprechen dieselbe Sprache */
+.journey-heading h2,
+.fit h2,
+.why-now h2,
+.bars-intro h2,
+.note-body h2,
+.closing-cta h2{
+  font-family:var(--font-ui)!important;
+  font-weight:800!important;
+  font-style:normal!important;
+  letter-spacing:-.045em!important;
+  line-height:1.08!important;
+  color:var(--paper)!important;
+}
+
+/* Hauptüberschriften der großen Abschnitte */
+.journey-heading h2,
+.why-now h2,
+.bars-intro h2,
+.closing-cta h2{
+  font-size:clamp(30px,3vw,42px)!important;
+}
+
+/* Kleinere Inhaltsüberschriften */
+.fit h2,
+.note-body h2{
+  font-size:clamp(22px,2.1vw,29px)!important;
+  letter-spacing:-.035em!important;
+  line-height:1.12!important;
+}
+
+/* Warum jetzt ist eine Rubrik – keine zweite Headline */
+.why-now .question{
+  display:block!important;
+  color:var(--cyan)!important;
+  margin:0 0 13px!important;
+}
+
+/* Ruhiger, einheitlicher Fließtext */
+.journey-heading p,
+.fit p,
+.why-now p,
+.profile-bars .language-note,
+.note-body p,
+.closing-cta p,
+.letter{
+  font-family:var(--font-ui)!important;
+  font-weight:400!important;
+  letter-spacing:-.01em!important;
+  line-height:1.65!important;
+}
+
+.journey-heading p,
+.why-now p,
+.note-body p,
+.closing-cta p{
+  font-size:15px!important;
+}
+
+/* Profil */
+.bars-intro h2{
+  max-width:680px!important;
+  margin:12px 0 0!important;
+}
+.bar-item strong{
+  font-family:var(--font-ui)!important;
+  font-weight:700!important;
+  letter-spacing:-.02em!important;
+}
+
+/* Lebenslauf: Titel und Stationen lesbar statt komprimiert */
+.journey-heading h2{
+  margin:8px 0 10px!important;
+}
+.journey .timeline h3{
+  font-family:var(--font-ui)!important;
+  font-weight:750!important;
+  letter-spacing:-.025em!important;
+  line-height:1.25!important;
+}
+.journey .timeline p{
+  font-family:var(--font-ui)!important;
+  font-weight:400!important;
+  letter-spacing:-.005em!important;
+}
+
+/* Abschluss nicht mehr in der schmalen Display-Schrift */
+.closing-cta h2{
+  max-width:900px!important;
+  margin:13px 0 14px!important;
+}
+.cta-sign strong{
+  font-family:var(--font-ui)!important;
+  font-weight:800!important;
+  font-style:normal!important;
+  letter-spacing:-.035em!important;
+}
+
+/* Familiennotiz ebenfalls in derselben Typografie */
+.note-body h2{
+  margin:0 0 9px!important;
+}
+
+/* Desktop-Abstände: gleiche optische Rhythmik */
+@media (min-width:901px){
+  .why-now,
+  .profile-bars{
+    padding-top:38px!important;
+    padding-bottom:38px!important;
+  }
+
+  .why-now h2,
+  .bars-intro h2{
+    margin-top:0!important;
+  }
+
+  .closing-cta{
+    padding-top:30px!important;
+    padding-bottom:30px!important;
+  }
+}
+
+/* Tablet / Mobil */
+@media (max-width:900px){
+  .journey-heading h2,
+  .why-now h2,
+  .bars-intro h2,
+  .closing-cta h2{
+    font-size:32px!important;
+    line-height:1.1!important;
+  }
+
+  .fit h2,
+  .note-body h2{
+    font-size:24px!important;
+  }
+}
+
+@media (max-width:680px){
+  .edition,
+  .role,
+  .index,
+  .why-now .question,
+  .polo-kicker{
+    font-size:10px!important;
+    letter-spacing:1.2px!important;
+  }
+
+  .journey-heading h2,
+  .why-now h2,
+  .bars-intro h2,
+  .closing-cta h2{
+    font-size:28px!important;
+  }
+
+  .journey-heading p,
+  .why-now p,
+  .note-body p,
+  .closing-cta p{
+    font-size:14px!important;
+  }
+}
