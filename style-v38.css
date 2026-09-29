@@ -5950,3 +5950,106 @@ header,
   .family-note .note-body h2{font-size:22px!important;}
   .family-note .note-body p{font-size:17px!important;}
 }
+
+
+/* === LIVE EXPERIENCE V59 === */
+.photo .experience{
+  position:absolute!important;
+  left:50%!important;
+  right:auto!important;
+  bottom:16px!important;
+
+  width:auto!important;
+  min-width:360px!important;
+  max-width:calc(100% - 32px)!important;
+  height:64px!important;
+  min-height:64px!important;
+
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:14px!important;
+
+  margin:0!important;
+  padding:0 24px!important;
+
+  background:rgba(10,31,37,.92)!important;
+  border:1px solid rgba(39,218,222,.26)!important;
+  border-radius:999px!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.18)!important;
+
+  transform:translateX(-50%)!important;
+  animation:none!important;
+  overflow:hidden!important;
+  z-index:20!important;
+}
+
+.photo .experience::before,
+.photo .experience::after{
+  content:''!important;
+  display:block!important;
+  width:28px!important;
+  height:1px!important;
+  flex:0 0 28px!important;
+  background:rgba(39,218,222,.34)!important;
+}
+
+.photo .experience-kicker,
+.photo .experience-caption{
+  margin:0!important;
+  padding:0!important;
+  color:#8da9af!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:9px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  letter-spacing:1.5px!important;
+  white-space:nowrap!important;
+}
+
+.photo .experience strong{
+  margin:0!important;
+  padding:0 12px!important;
+  color:var(--cyan)!important;
+  font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+  font-size:42px!important;
+  line-height:.82!important;
+  font-weight:800!important;
+  letter-spacing:-.5px!important;
+}
+
+.photo .experience strong::before,
+.photo .experience strong::after{
+  display:none!important;
+}
+
+@media(max-width:680px){
+  .photo .experience{
+    bottom:10px!important;
+    min-width:0!important;
+    width:calc(100% - 24px)!important;
+    max-width:none!important;
+    height:56px!important;
+    min-height:56px!important;
+    padding:0 14px!important;
+    gap:8px!important;
+  }
+
+  .photo .experience::before,
+  .photo .experience::after{
+    width:14px!important;
+    flex-basis:14px!important;
+  }
+
+  .photo .experience-kicker,
+  .photo .experience-caption{
+    font-size:8px!important;
+    letter-spacing:1.1px!important;
+  }
+
+  .photo .experience strong{
+    font-size:34px!important;
+    padding:0 8px!important;
+  }
+}
+/* === END LIVE EXPERIENCE V59 === */
