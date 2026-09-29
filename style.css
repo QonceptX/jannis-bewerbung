@@ -1678,3 +1678,81 @@ h1{
     font-size:8.5px!important;
   }
 }
+
+
+/* === EXPERIENCE BADGE V3 · ruhig, breit, hochwertig === */
+.experience{
+  position:absolute!important;
+  top:28px!important;
+  left:-34px!important;
+  width:220px!important;
+  min-width:220px!important;
+  padding:22px 24px 20px!important;
+  background:var(--cyan)!important;
+  color:#10272c!important;
+  border:0!important;
+  border-radius:2px!important;
+  box-shadow:0 14px 34px rgba(3,14,18,.22)!important;
+  transform:none!important;
+  rotate:0deg!important;
+  animation:none!important;
+  transition:none!important;
+}
+
+.experience strong{
+  display:block!important;
+  font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+  font-size:58px!important;
+  line-height:.82!important;
+  font-weight:800!important;
+  letter-spacing:-1.4px!important;
+  white-space:normal!important;
+}
+
+.experience span{
+  display:block!important;
+  margin-top:14px!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:11px!important;
+  line-height:1.1!important;
+  font-weight:800!important;
+  letter-spacing:1.55px!important;
+  text-transform:uppercase!important;
+}
+
+@media(max-width:900px){
+  .experience{
+    top:22px!important;
+    left:-20px!important;
+    width:190px!important;
+    min-width:190px!important;
+    padding:20px 22px 18px!important;
+  }
+
+  .experience strong{
+    font-size:52px!important;
+  }
+
+  .experience span{
+    font-size:10px!important;
+  }
+}
+
+@media(max-width:680px){
+  .experience{
+    top:18px!important;
+    left:-8px!important;
+    width:165px!important;
+    min-width:165px!important;
+    padding:17px 18px 16px!important;
+  }
+
+  .experience strong{
+    font-size:44px!important;
+  }
+
+  .experience span{
+    margin-top:10px!important;
+    font-size:9px!important;
+  }
+}
