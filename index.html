@@ -19,23 +19,145 @@ portrait.addEventListener('pointerleave',()=>{portrait.style.setProperty('--rx',
 const journey=document.querySelector('.journey');
 const timeline=document.querySelector('.timeline');
 const timelineItems=[...document.querySelectorAll('.timeline article')];
+
 if(journey&&timeline&&timelineItems.length){
   const desktop=window.matchMedia('(min-width: 901px)');
-  const updateTimeline=()=>{
-    const total=Math.max(journey.offsetHeight-window.innerHeight,1);
-    const passed=Math.min(Math.max(-journey.getBoundingClientRect().top,0),total);
-    const progress=desktop.matches?passed/total:1;
+  let step=-1;
+  let wheelSum=0;
+  let wheelLocked=false;
+  let releasedDown=false;
+
+  const renderStep=()=>{
+    const progress=step<0?0:step/(timelineItems.length-1);
     timeline.style.setProperty('--timeline-progress',progress.toFixed(4));
-    const scaled=progress*(timelineItems.length-1);
-    const active=Math.min(timelineItems.length-1,Math.floor(scaled+0.0001));
     timelineItems.forEach((item,i)=>{
-      item.classList.toggle('is-passed',i<active);
-      item.classList.toggle('is-active',i===active);
+      item.classList.toggle('is-passed',step>=0&&i<step);
+      item.classList.toggle('is-active',i===step);
     });
   };
-  addEventListener('scroll',updateTimeline,{passive:true});
-  addEventListener('resize',updateTimeline);
-  if(desktop.addEventListener){desktop.addEventListener('change',updateTimeline);}else if(desktop.addListener){desktop.addListener(updateTimeline);}
-  updateTimeline();
+
+  const isPinned=()=>{
+    if(!desktop.matches) return false;
+    const r=journey.getBoundingClientRect();
+    const pinTop=110;
+    return r.top<=pinTop+2 && r.bottom>window.innerHeight*0.72;
+  };
+
+  const snapToJourney=()=>{
+    if(!desktop.matches) return;
+    const r=journey.getBoundingClientRect();
+    if(r.top<110 && r.top>-120){
+      window.scrollBy({top:r.top-110,behavior:'auto'});
+    }
+  };
+
+  window.addEventListener('wheel',event=>{
+    if(!desktop.matches) return;
+
+    if(!isPinned()){
+      if(journey.getBoundingClientRect().top>110){
+        step=-1;
+        releasedDown=false;
+        renderStep();
+      }
+      return;
+    }
+
+    const direction=Math.sign(event.deltaY);
+    if(direction===0) return;
+
+    if(direction<0 && step<0){
+      return;
+    }
+    if(direction>0 && step===timelineItems.length-1 && releasedDown){
+      return;
+    }
+
+    event.preventDefault();
+
+    wheelSum+=event.deltaY;
+    if(Math.abs(wheelSum)<38 || wheelLocked) return;
+
+    wheelLocked=true;
+    const down=wheelSum>0;
+    wheelSum=0;
+
+    if(down){
+      if(step<timelineItems.length-1){
+        step++;
+        releasedDown=false;
+        renderStep();
+        snapToJourney();
+      }else{
+        releasedDown=true;
+        const next=journey.nextElementSibling;
+        if(next){
+          const top=next.getBoundingClientRect().top+window.scrollY-26;
+          window.scrollTo({top,behavior:'smooth'});
+        }
+      }
+    }else{
+      releasedDown=false;
+      if(step>0){
+        step--;
+        renderStep();
+        snapToJourney();
+      }else if(step===0){
+        step=-1;
+        renderStep();
+        const previousTop=journey.offsetTop-window.innerHeight*.45;
+        window.scrollTo({top:Math.max(0,previousTop),behavior:'smooth'});
+      }
+    }
+
+    window.setTimeout(()=>{wheelLocked=false;},360);
+  },{passive:false});
+
+  window.addEventListener('keydown',event=>{
+    if(!desktop.matches||!isPinned()) return;
+    if(!['ArrowDown','PageDown',' ','ArrowUp','PageUp'].includes(event.key)) return;
+
+    const down=['ArrowDown','PageDown',' '].includes(event.key);
+    if(down && step===timelineItems.length-1 && releasedDown) return;
+    if(!down && step<0) return;
+
+    event.preventDefault();
+
+    if(down){
+      if(step<timelineItems.length-1){
+        step++;
+        releasedDown=false;
+        renderStep();
+      }else{
+        releasedDown=true;
+        const next=journey.nextElementSibling;
+        if(next){
+          const top=next.getBoundingClientRect().top+window.scrollY-26;
+          window.scrollTo({top,behavior:'smooth'});
+        }
+      }
+    }else{
+      releasedDown=false;
+      if(step>0){
+        step--;
+        renderStep();
+      }else{
+        step=-1;
+        renderStep();
+      }
+    }
+  });
+
+  window.addEventListener('resize',renderStep);
+  if(desktop.addEventListener){
+    desktop.addEventListener('change',()=>{
+      step=desktop.matches?-1:timelineItems.length-1;
+      releasedDown=false;
+      renderStep();
+    });
+  }
+
+  if(!desktop.matches) step=timelineItems.length-1;
+  renderStep();
 }
 </script></body></html>
