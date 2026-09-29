@@ -827,6 +827,83 @@
     display:none!important;
   }
 }
+</style><style id="final-journey-layout-v49">
+/* === V49 · Lebenslaufkopf nutzt endlich die volle Breite === */
+@media(min-width:901px){
+  .journey{
+    padding:34px 40px 28px!important;
+  }
+
+  .journey-heading{
+    display:grid!important;
+    grid-template-columns:minmax(330px,460px) minmax(420px,1fr)!important;
+    grid-template-areas:
+      "label copy"
+      "title copy"!important;
+    column-gap:72px!important;
+    row-gap:10px!important;
+    align-items:end!important;
+
+    width:100%!important;
+    max-width:none!important;
+    margin:0 0 34px!important;
+  }
+
+  .journey-heading>.index{
+    grid-area:label!important;
+    margin:0!important;
+    align-self:end!important;
+  }
+
+  .journey-heading>h2{
+    grid-area:title!important;
+    margin:0!important;
+    max-width:none!important;
+  }
+
+  .journey-heading>p{
+    grid-area:copy!important;
+    align-self:end!important;
+
+    width:100%!important;
+    max-width:720px!important;
+    margin:0 0 2px auto!important;
+
+    font-size:15px!important;
+    line-height:1.6!important;
+    text-align:left!important;
+  }
+
+  .journey .timeline{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+  }
+}
+
+@media(max-width:900px){
+  .journey-heading{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    margin-bottom:28px!important;
+  }
+
+  .journey-heading>.index{
+    display:block!important;
+    margin-bottom:10px!important;
+  }
+
+  .journey-heading>h2{
+    margin:0 0 14px!important;
+  }
+
+  .journey-heading>p{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+  }
+}
 </style></head>
 <body>
 <main class="application">
