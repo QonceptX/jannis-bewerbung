@@ -1756,3 +1756,92 @@ h1{
     font-size:9px!important;
   }
 }
+
+
+/* === EXPERIENCE BADGE V4 · Foto zurück, Briefmarke groß === */
+@media (min-width:901px){
+  /* Foto wieder auf die vorherige, ruhigere Größe */
+  .visual{
+    min-height:450px!important;
+    max-width:560px!important;
+  }
+
+  /* Nur die 1998-Kachel wird groß */
+  .experience{
+    top:24px!important;
+    left:-38px!important;
+    width:238px!important;
+    min-width:238px!important;
+    min-height:154px!important;
+    padding:24px 28px 22px!important;
+
+    background:var(--cyan)!important;
+    color:#10272c!important;
+
+    border:0!important;
+    border-radius:0!important;
+    box-shadow:0 14px 34px rgba(3,14,18,.22)!important;
+
+    transform:rotate(-2deg)!important;
+    animation:none!important;
+    transition:none!important;
+
+    -webkit-mask:
+      radial-gradient(circle 6px at 6px 6px,transparent 5.5px,#000 6px) -6px -6px/18px 18px,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite:source-in;
+    mask:
+      radial-gradient(circle 6px at 6px 6px,transparent 5.5px,#000 6px) -6px -6px/18px 18px,
+      linear-gradient(#000 0 0);
+    mask-composite:intersect;
+  }
+
+  .experience strong{
+    font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+    font-size:66px!important;
+    line-height:.80!important;
+    font-weight:800!important;
+    letter-spacing:-1.7px!important;
+  }
+
+  .experience span{
+    margin-top:16px!important;
+    font-family:Manrope,Arial,sans-serif!important;
+    font-size:11px!important;
+    line-height:1.1!important;
+    font-weight:800!important;
+    letter-spacing:1.6px!important;
+  }
+}
+
+@media (max-width:900px){
+  .visual{
+    min-height:420px!important;
+  }
+
+  .experience{
+    width:205px!important;
+    min-width:205px!important;
+    min-height:136px!important;
+    padding:21px 24px 19px!important;
+    transform:rotate(-2deg)!important;
+    animation:none!important;
+  }
+
+  .experience strong{
+    font-size:58px!important;
+  }
+}
+
+@media (max-width:680px){
+  .experience{
+    width:176px!important;
+    min-width:176px!important;
+    min-height:118px!important;
+    padding:18px 20px 16px!important;
+  }
+
+  .experience strong{
+    font-size:49px!important;
+  }
+}
