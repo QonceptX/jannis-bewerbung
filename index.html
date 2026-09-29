@@ -1065,6 +1065,280 @@
     padding-left:20px!important;
   }
 }
+</style><style id="final-family-note-v54">
+/* === V54 · persönlicher Familienprojekt-Abschnitt === */
+.family-note-v2{
+  position:relative!important;
+
+  display:grid!important;
+  grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr)!important;
+  align-items:center!important;
+  gap:54px!important;
+
+  width:100%!important;
+  margin:0!important;
+  padding:34px 36px!important;
+
+  border:1px solid rgba(255,255,255,.08)!important;
+  border-radius:14px!important;
+  background:
+    radial-gradient(circle at 88% 16%,rgba(39,218,222,.06),transparent 30%),
+    linear-gradient(110deg,rgba(24,46,53,.86),rgba(15,31,37,.9))!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+
+.family-note-v2::before{
+  content:''!important;
+  position:absolute!important;
+  left:0!important;
+  top:0!important;
+  bottom:0!important;
+  width:4px!important;
+  background:var(--cyan)!important;
+}
+
+.family-note-copy{
+  min-width:0!important;
+}
+
+.family-note-copy>.index{
+  display:block!important;
+  margin:0 0 12px!important;
+
+  color:var(--cyan)!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:14px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  letter-spacing:1.45px!important;
+}
+
+.family-note-copy h2{
+  margin:0 0 13px!important;
+
+  color:#f1f6f7!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:24px!important;
+  line-height:1.25!important;
+  font-weight:500!important;
+  letter-spacing:-.3px!important;
+}
+
+.family-note-copy p{
+  margin:0!important;
+  max-width:760px!important;
+
+  color:#aebfc4!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:15px!important;
+  line-height:1.6!important;
+  font-weight:400!important;
+}
+
+.family-note-people{
+  display:grid!important;
+  grid-template-columns:1fr auto 1fr!important;
+  align-items:center!important;
+  gap:16px!important;
+
+  min-width:0!important;
+  padding-left:30px!important;
+  border-left:1px solid rgba(255,255,255,.08)!important;
+}
+
+.family-person{
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  min-width:0!important;
+}
+
+.family-initials{
+  flex:0 0 auto!important;
+
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+
+  width:46px!important;
+  height:46px!important;
+
+  border:1px solid rgba(39,218,222,.35)!important;
+  border-radius:50%!important;
+  background:rgba(39,218,222,.06)!important;
+
+  color:var(--cyan)!important;
+  font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+  font-size:19px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  letter-spacing:.3px!important;
+}
+
+.family-person>div{
+  display:flex!important;
+  flex-direction:column!important;
+  min-width:0!important;
+  gap:3px!important;
+}
+
+.family-person strong{
+  color:#e7eff0!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:13px!important;
+  line-height:1.25!important;
+  font-weight:600!important;
+  white-space:nowrap!important;
+}
+
+.family-person small{
+  color:#718a91!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:10px!important;
+  line-height:1.3!important;
+  font-weight:500!important;
+  white-space:nowrap!important;
+}
+
+.family-link{
+  color:#3bd9dc!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:18px!important;
+  line-height:1!important;
+  font-weight:400!important;
+  opacity:.7!important;
+}
+
+/* alte Dekoelemente sicher aus */
+.family-note .note-top,
+.family-note .note-stamp,
+.family-note .note-pin{
+  display:none!important;
+}
+
+/* Tablet */
+@media(max-width:1100px){
+  .family-note-v2{
+    grid-template-columns:1fr!important;
+    gap:26px!important;
+  }
+
+  .family-note-people{
+    padding:22px 0 0!important;
+    border-left:0!important;
+    border-top:1px solid rgba(255,255,255,.08)!important;
+  }
+}
+
+/* Mobil */
+@media(max-width:680px){
+  .family-note-v2{
+    gap:22px!important;
+    padding:26px 20px 24px!important;
+    border-radius:12px!important;
+  }
+
+  .family-note-copy>.index{
+    font-size:13px!important;
+    margin-bottom:10px!important;
+  }
+
+  .family-note-copy h2{
+    font-size:22px!important;
+    line-height:1.28!important;
+  }
+
+  .family-note-copy p{
+    font-size:17px!important;
+    line-height:1.6!important;
+  }
+
+  .family-note-people{
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+    padding-top:18px!important;
+  }
+
+  .family-link{
+    display:none!important;
+  }
+
+  .family-person{
+    padding:4px 0!important;
+  }
+
+  .family-initials{
+    width:42px!important;
+    height:42px!important;
+    font-size:18px!important;
+  }
+
+  .family-person strong{
+    font-size:14px!important;
+  }
+
+  .family-person small{
+    font-size:11px!important;
+  }
+}
+
+/* Druck */
+@media print{
+  .family-note-v2{
+    display:grid!important;
+    grid-template-columns:1.2fr .8fr!important;
+    gap:5mm!important;
+    padding:4mm!important;
+    border:.5pt solid #b9c9cd!important;
+    border-left:2pt solid #00aeba!important;
+    border-radius:2mm!important;
+    background:#f6f9f9!important;
+  }
+
+  .family-note-v2::before{
+    display:none!important;
+  }
+
+  .family-note-copy>.index{
+    color:#008f9b!important;
+    font-size:6pt!important;
+  }
+
+  .family-note-copy h2{
+    color:#173039!important;
+    font-size:10.5pt!important;
+  }
+
+  .family-note-copy p{
+    color:#526a72!important;
+    font-size:7.2pt!important;
+    line-height:1.42!important;
+  }
+
+  .family-note-people{
+    padding-left:4mm!important;
+    border-left:.5pt solid #c8d3d6!important;
+  }
+
+  .family-initials{
+    width:9mm!important;
+    height:9mm!important;
+    border:.5pt solid #00aeba!important;
+    color:#008f9b!important;
+    font-size:7pt!important;
+  }
+
+  .family-person strong{
+    color:#173039!important;
+    font-size:6.5pt!important;
+  }
+
+  .family-person small{
+    color:#657a81!important;
+    font-size:5.5pt!important;
+  }
+}
 </style></head>
 <body>
 <main class="application">
@@ -1118,7 +1392,33 @@
   </a>
 </section>
 <section class="why-now" aria-label="Warum ich jetzt wechseln möchte"><div><span class="index question">WARUM JETZT?</span><h2>Ich möchte weiterarbeiten –<br>nur etwas ruhiger und mit neuen Aufgaben.</h2></div><div><p>Ich habe noch ein paar Jahre bis zur Rente und möchte diese Zeit aktiv nutzen. Nach fast drei Jahrzehnten im eigenen Betrieb darf die Arbeit gern planbarer und körperlich etwas ruhiger werden.</p><p>Aufhören möchte ich deshalb noch lange nicht. Ich möchte meine Erfahrung einbringen, mit Menschen arbeiten und mich in neue Geräte und Abläufe einarbeiten.</p></div></section><section class="profile-bars" aria-label="Mein Profil"><div class="bars-intro"><span class="index">MEIN PROFIL</span><h2>Was ich mitbringe.<br>Und was mich ausmacht.</h2></div><div class="bars"><div class="bar-item"><div><strong>Handwerkliche Praxis</strong><span>seit 1998</span></div><div class="bar"><i style="width:100%"></i></div></div><div class="bar-item"><div><strong>Kunden & Aufträge</strong><span>viele Jahre zuverlässig</span></div><div class="bar"><i style="width:92%"></i></div></div><div class="bar-item"><div><strong>Familie & Verantwortung</strong><span>verheiratet · 3 Kinder</span></div><div class="bar"><i style="width:96%"></i></div></div><div class="bar-item"><div><strong>Deutsch im Arbeitsalltag</strong><span>nicht perfekt, aber erprobt</span></div><div class="bar"><i style="width:58%"></i></div></div><p class="language-note">Für einen Deutschkurs war neben Betrieb, Kunden und Familie selten Luft. Im Alltag hat die Sprache trotzdem funktioniert: zuhören, nachfragen, erklären und den Auftrag sauber abschließen.</p></div></section>
-<section class="closing" aria-label="Persönliche Nachricht"><aside class="family-note"><div class="note-top"><span class="note-pin">+</span><span class="index">PS · NOCH EINE KLEINE NOTIZ</span></div><div class="note-body"><h2>Diese Bewerbung ist ein Familienprojekt.</h2><p>Mein Schwiegersohn hat mir bei der digitalen Seite geholfen. Die Erfahrung, die Geschichten und die Motivation kommen von mir. Er meinte: Eine gute Bewerbung darf ruhig zeigen, wer dahintersteht. Recht hat er.</p></div><div class="note-stamp"><strong>ECHT</strong><span>von Jannis<br>digital unterstützt</span></div></aside><div class="closing-cta"><span class="index">ZUM ABSCHLUSS</span><h2>Wenn Sie meine Bewerbung interessant finden, freue ich mich über Ihre Rückmeldung.</h2><p>Vielleicht lernen wir uns dann persönlich kennen. Ich bringe Erfahrung mit – und Lust auf den nächsten Schritt.</p><div class="cta-sign"><strong>Jannis Tsopanoglou</strong><span>Troisdorf · seit 1998 im Handwerk</span></div></div></section><footer class="contact-footer" aria-label="Kontakt Jannis Tsopanoglou">
+<section class="closing" aria-label="Persönliche Nachricht"><aside class="family-note family-note-v2">
+  <div class="family-note-copy">
+    <span class="index">PERSÖNLICH GEMACHT</span>
+    <h2>Diese Bewerbung ist ein Familienprojekt.</h2>
+    <p>Die Erfahrung, die Geschichten und die Motivation kommen von mir. Bei Idee, Gestaltung und technischer Umsetzung dieser Seite hat mir mein Schwiegersohn Thomas Chatzis sehr geholfen.</p>
+  </div>
+
+  <div class="family-note-people" aria-label="Jannis Tsopanoglou und Thomas Chatzis">
+    <div class="family-person">
+      <span class="family-initials">JT</span>
+      <div>
+        <strong>Jannis Tsopanoglou</strong>
+        <small>Erfahrung &amp; Inhalt</small>
+      </div>
+    </div>
+
+    <span class="family-link" aria-hidden="true">+</span>
+
+    <div class="family-person">
+      <span class="family-initials">TC</span>
+      <div>
+        <strong>Thomas Chatzis</strong>
+        <small>Idee &amp; digitale Umsetzung</small>
+      </div>
+    </div>
+  </div>
+</aside><div class="closing-cta"><span class="index">ZUM ABSCHLUSS</span><h2>Wenn Sie meine Bewerbung interessant finden, freue ich mich über Ihre Rückmeldung.</h2><p>Vielleicht lernen wir uns dann persönlich kennen. Ich bringe Erfahrung mit – und Lust auf den nächsten Schritt.</p><div class="cta-sign"><strong>Jannis Tsopanoglou</strong><span>Troisdorf · seit 1998 im Handwerk</span></div></div></section><footer class="contact-footer" aria-label="Kontakt Jannis Tsopanoglou">
   <div class="contact-footer-intro">
     <span class="contact-footer-kicker">KONTAKT</span>
     <strong>Jannis Tsopanoglou</strong>
