@@ -468,3 +468,80 @@ footer{margin-top:26px}.footer-brand strong{font-size:25px}
     margin:0 0 8px!important;
   }
 }
+
+
+/* === TIMELINE FINAL V4 · hard scroll lock + exact bullet rail === */
+html.timeline-locked,
+body.timeline-locked{
+  overflow:hidden!important;
+  overscroll-behavior:none!important;
+}
+body.timeline-locked{
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+}
+
+@media (min-width:901px){
+  .journey{
+    min-height:100vh!important;
+    padding:46px 38px 44px!important;
+  }
+
+  .journey .timeline{
+    --rail-left:0px;
+    --rail-width:0px;
+    --laser-width:0px;
+    position:relative!important;
+    top:auto!important;
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:0!important;
+    padding:18px 0 10px!important;
+    z-index:5!important;
+  }
+
+  .journey .timeline::before,
+  .journey .timeline::after{
+    content:''!important;
+    position:absolute!important;
+    top:66px!important;
+    left:var(--rail-left)!important;
+    height:2px!important;
+    border-radius:999px!important;
+    pointer-events:none!important;
+    transform:none!important;
+    animation:none!important;
+    filter:none!important;
+  }
+
+  .journey .timeline::before{
+    width:var(--rail-width)!important;
+    background:#425d64!important;
+    opacity:.9!important;
+    box-shadow:none!important;
+  }
+
+  .journey .timeline::after{
+    width:var(--laser-width)!important;
+    min-width:0!important;
+    background:linear-gradient(90deg,#27dade 0%,#dfffff 90%,#fff 100%)!important;
+    box-shadow:0 0 8px rgba(39,218,222,.42),0 0 18px rgba(39,218,222,.2)!important;
+    transition:width .32s cubic-bezier(.22,.61,.36,1)!important;
+  }
+
+  .journey .timeline article,
+  .journey .timeline article+article{
+    opacity:.35!important;
+  }
+
+  .journey .timeline article.is-passed,
+  .journey .timeline article.is-active{
+    opacity:1!important;
+  }
+
+  .journey .timeline article.is-active{
+    transform:translateY(-2px)!important;
+  }
+}
