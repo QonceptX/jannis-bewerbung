@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="de">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jannis Tsopanoglou · Ihr nächster Servicetechniker</title><meta name="description" content="Handwerker seit 1998. Meine Bewerbung als Servicetechniker in Bonn-Beuel."><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23131e23'/%3E%3Ctext x='12' y='30' font-family='Arial' font-size='30' fill='%2324d9dc'%3EJ%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="style-v14.css"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jannis Tsopanoglou · Ihr nächster Servicetechniker</title><meta name="description" content="Handwerker seit 1998. Meine Bewerbung als Servicetechniker in Bonn-Beuel."><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23131e23'/%3E%3Ctext x='12' y='30' font-family='Arial' font-size='30' fill='%2324d9dc'%3EJ%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="style-v15.css"></head>
 <body>
 <main class="application">
 <header><span class="edition">PERSÖNLICHE BEWERBUNG <span>/ 2026</span></span><button class="print" type="button" onclick="window.print()" aria-label="Bewerbung drucken oder als PDF speichern">Drucken / PDF</button></header>
@@ -30,35 +30,65 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
   let ignoreAutoLockUntil=0;
 
   const now=()=>Date.now();
+  const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
 
-  const setRailGeometry=()=>{
+  const setDesktopRail=()=>{
     const tr=timeline.getBoundingClientRect();
     const points=timelineDots.map(dot=>{
       const r=dot.getBoundingClientRect();
-      return {
-        x:r.left-tr.left+r.width/2,
-        y:r.top-tr.top+r.height/2
-      };
+      return {x:r.left-tr.left+r.width/2,y:r.top-tr.top+r.height/2};
     });
-
-    if(points.length<2) return;
-
+    if(points.length<2)return;
     const first=points[0].x;
     const last=points[points.length-1].x;
     const railY=points.reduce((sum,p)=>sum+p.y,0)/points.length;
     const progress=step<0?0:step/(timelineItems.length-1);
-
     timeline.style.setProperty('--rail-left',first+'px');
     timeline.style.setProperty('--rail-width',(last-first)+'px');
     timeline.style.setProperty('--laser-width',((last-first)*progress)+'px');
     timeline.style.setProperty('--rail-y',railY+'px');
   };
 
-  const render=()=>{
-    setRailGeometry();
+  const renderDesktop=()=>{
+    setDesktopRail();
     timelineItems.forEach((item,i)=>{
       item.classList.toggle('is-passed',step>=0&&i<step);
       item.classList.toggle('is-active',i===step);
+    });
+  };
+
+  const renderMobile=()=>{
+    if(desktop.matches)return;
+    const tr=timeline.getBoundingClientRect();
+    const dots=timelineDots.map(dot=>{
+      const r=dot.getBoundingClientRect();
+      return {
+        localY:r.top-tr.top+r.height/2,
+        screenY:r.top+r.height/2
+      };
+    });
+    if(dots.length<2)return;
+
+    const first=dots[0];
+    const last=dots[dots.length-1];
+    const railHeight=Math.max(0,last.localY-first.localY);
+    const readLine=window.innerHeight*.56;
+    const progress=clamp((readLine-first.screenY)/(last.screenY-first.screenY),0,1);
+    const laserHeight=railHeight*progress;
+
+    timeline.style.setProperty('--mobile-rail-top',first.localY+'px');
+    timeline.style.setProperty('--mobile-rail-height',railHeight+'px');
+    timeline.style.setProperty('--mobile-laser-height',laserHeight+'px');
+
+    let active=-1;
+    dots.forEach((dot,i)=>{
+      if(dot.screenY<=readLine)active=i;
+    });
+    if(active<0&&first.screenY<window.innerHeight*.82)active=0;
+
+    timelineItems.forEach((item,i)=>{
+      item.classList.toggle('is-passed',active>=0&&i<active);
+      item.classList.toggle('is-active',i===active);
     });
   };
 
@@ -71,7 +101,7 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
   };
 
   const unfreeze=()=>{
-    if(!locked) return;
+    if(!locked)return;
     document.documentElement.classList.remove('timeline-locked');
     document.body.classList.remove('timeline-locked');
     document.body.style.top='';
@@ -80,19 +110,19 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
   };
 
   const shouldEnter=()=>{
-    if(!desktop.matches || locked || now()<ignoreAutoLockUntil) return false;
+    if(!desktop.matches||locked||now()<ignoreAutoLockUntil)return false;
     const r=journey.getBoundingClientRect();
     const trigger=window.innerHeight*.30;
-    return r.top<=trigger && r.bottom>trigger+80;
+    return r.top<=trigger&&r.bottom>trigger+80;
   };
 
   const enter=()=>{
-    if(!shouldEnter()) return;
+    if(!shouldEnter())return;
     const r=journey.getBoundingClientRect();
     const targetY=Math.max(0,window.scrollY+r.top-42);
     window.scrollTo(0,targetY);
     step=0;
-    render();
+    renderDesktop();
     freezeAt(targetY);
   };
 
@@ -110,7 +140,7 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
     ignoreAutoLockUntil=now()+1200;
     unfreeze();
     step=-1;
-    render();
+    renderDesktop();
     const top=Math.max(0,journey.offsetTop-window.innerHeight*.55);
     window.scrollTo({top,behavior:'smooth'});
   };
@@ -119,14 +149,14 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
     if(dir>0){
       if(step<timelineItems.length-1){
         step++;
-        render();
+        renderDesktop();
       }else{
         leaveDown();
       }
     }else{
       if(step>0){
         step--;
-        render();
+        renderDesktop();
       }else{
         leaveUp();
       }
@@ -134,56 +164,63 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
   };
 
   window.addEventListener('scroll',()=>{
-    if(!locked) enter();
+    if(desktop.matches){
+      if(!locked)enter();
+    }else{
+      renderMobile();
+    }
   },{passive:true});
 
   window.addEventListener('wheel',event=>{
-    if(!desktop.matches) return;
-
+    if(!desktop.matches)return;
     if(!locked){
       enter();
-      if(!locked) return;
+      if(!locked)return;
     }
-
     event.preventDefault();
-    if(wheelCooldown) return;
-
+    if(wheelCooldown)return;
     const dir=Math.sign(event.deltaY);
-    if(!dir) return;
-
+    if(!dir)return;
     wheelCooldown=true;
     move(dir);
     setTimeout(()=>{wheelCooldown=false;},320);
   },{passive:false});
 
   window.addEventListener('keydown',event=>{
-    if(!desktop.matches) return;
-
+    if(!desktop.matches)return;
     const down=['ArrowDown','PageDown',' '].includes(event.key);
     const up=['ArrowUp','PageUp','Home'].includes(event.key);
-    if(!down&&!up) return;
-
+    if(!down&&!up)return;
     if(!locked){
       enter();
-      if(!locked) return;
+      if(!locked)return;
     }
-
     event.preventDefault();
     move(down?1:-1);
   });
 
-  window.addEventListener('resize',render);
+  const renderForViewport=()=>{
+    if(desktop.matches){
+      renderDesktop();
+    }else{
+      renderMobile();
+    }
+  };
+
+  window.addEventListener('resize',renderForViewport);
 
   if(desktop.addEventListener){
     desktop.addEventListener('change',()=>{
       ignoreAutoLockUntil=now()+500;
       unfreeze();
-      step=desktop.matches?-1:timelineItems.length-1;
-      render();
+      step=-1;
+      timelineItems.forEach(item=>{
+        item.classList.remove('is-passed','is-active');
+      });
+      requestAnimationFrame(renderForViewport);
     });
   }
 
-  if(!desktop.matches) step=timelineItems.length-1;
-  render();
+  renderForViewport();
 }
 </script></body></html>
