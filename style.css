@@ -1268,3 +1268,176 @@ h1{
     font-size:19px!important;
   }
 }
+
+
+/* === DESIGN SCALE V5 · insgesamt kleiner + Displayfont zurück === */
+@media (min-width:901px){
+
+  /* Seite insgesamt etwas kompakter */
+  .application{
+    max-width:1160px!important;
+    padding-left:36px!important;
+    padding-right:36px!important;
+  }
+
+  header{
+    height:70px!important;
+  }
+
+  .intro{
+    min-height:500px!important;
+    padding-top:30px!important;
+    padding-bottom:28px!important;
+    gap:38px!important;
+  }
+
+  /* Hero nicht mehr riesig */
+  h1{
+    font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+    font-size:clamp(62px,6.2vw,86px)!important;
+    line-height:.90!important;
+    font-weight:800!important;
+    letter-spacing:-.02em!important;
+    margin-bottom:18px!important;
+  }
+
+  .next-line{
+    font-size:21px!important;
+    line-height:1.3!important;
+    margin-bottom:17px!important;
+  }
+
+  .next-line strong{
+    font-size:27px!important;
+  }
+
+  .next-line>span{
+    font-size:17px!important;
+  }
+
+  .letter{
+    font-size:13px!important;
+    line-height:1.7!important;
+    margin-bottom:20px!important;
+  }
+
+  .visual{
+    min-height:450px!important;
+  }
+
+  .experience strong{
+    font-size:33px!important;
+  }
+
+  /* Große weiße Überschriften wieder in der stärkeren Display-Schrift */
+  .journey-heading h2,
+  .why-now h2,
+  .bars-intro h2,
+  .closing-cta h2{
+    font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+    font-size:30px!important;
+    line-height:1.02!important;
+    font-weight:700!important;
+    letter-spacing:-.35px!important;
+    margin:0 0 9px!important;
+  }
+
+  /* Kleinere Inhaltsüberschriften ebenfalls wieder etwas charaktervoller */
+  .fit h2,
+  .note-body h2{
+    font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+    font-size:23px!important;
+    line-height:1.08!important;
+    font-weight:700!important;
+    letter-spacing:-.25px!important;
+  }
+
+  /* Cyan-Rubriken bleiben klare Orientierung */
+  .journey-heading>.index,
+  .why-now .question,
+  .bars-intro>.index,
+  .note-top .index,
+  .closing-cta>.index,
+  .fit .index{
+    font-family:Manrope,Arial,sans-serif!important;
+    font-size:13px!important;
+    font-weight:800!important;
+    letter-spacing:1.55px!important;
+    color:var(--cyan)!important;
+    margin-bottom:9px!important;
+  }
+
+  /* Text allgemein leicht kleiner */
+  .journey-heading p,
+  .why-now p,
+  .closing-cta p,
+  .note-body p,
+  .fit p,
+  .profile-bars .language-note{
+    font-size:12.5px!important;
+    line-height:1.52!important;
+  }
+
+  /* Sektionen kompakter */
+  .application>section:not(.intro){
+    margin-top:16px!important;
+    margin-bottom:16px!important;
+  }
+
+  .journey{
+    padding:18px 22px 10px!important;
+  }
+
+  .why-now,
+  .profile-bars,
+  .fit{
+    padding:20px 22px!important;
+  }
+
+  .closing{
+    padding-top:16px!important;
+    padding-bottom:16px!important;
+  }
+
+  .family-note{
+    padding:16px 20px!important;
+  }
+
+  .closing-cta{
+    padding:18px 22px!important;
+  }
+
+  /* Timeline nochmals etwas kleiner */
+  .journey .timeline-year{
+    font-size:19px!important;
+  }
+
+  .journey .timeline h3{
+    font-size:13px!important;
+  }
+
+  .journey .timeline p{
+    font-size:10.5px!important;
+    line-height:1.4!important;
+  }
+}
+
+@media (max-width:900px){
+  h1{
+    font-size:clamp(54px,14vw,76px)!important;
+  }
+
+  .journey-heading h2,
+  .why-now h2,
+  .bars-intro h2,
+  .closing-cta h2{
+    font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+    font-size:27px!important;
+  }
+
+  .fit h2,
+  .note-body h2{
+    font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+    font-size:22px!important;
+  }
+}
