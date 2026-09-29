@@ -827,81 +827,152 @@
     display:none!important;
   }
 }
-</style><style id="final-journey-layout-v49">
-/* === V49 · Lebenslaufkopf nutzt endlich die volle Breite === */
+</style><style id="final-journey-layout-v50">
+/* === V50 · Lebenslaufkopf als echte Editorial-Komposition === */
+.journey{
+  position:relative!important;
+}
+
+.journey-heading{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:end!important;
+  gap:48px!important;
+
+  width:100%!important;
+  max-width:none!important;
+  margin:0 0 38px!important;
+}
+
+.journey-copy{
+  max-width:760px!important;
+}
+
+.journey-copy>.index{
+  display:block!important;
+  margin:0 0 12px!important;
+}
+
+.journey-copy>h2{
+  margin:0 0 14px!important;
+  max-width:none!important;
+}
+
+.journey-copy>p{
+  margin:0!important;
+  max-width:720px!important;
+  color:#9fb2b7!important;
+}
+
+.journey-meta{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:14px!important;
+
+  min-width:210px!important;
+  padding:0 0 4px 28px!important;
+
+  border-left:1px solid rgba(255,255,255,.09)!important;
+}
+
+.journey-meta>strong{
+  color:var(--cyan)!important;
+  font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+  font-size:62px!important;
+  line-height:.8!important;
+  font-weight:800!important;
+  letter-spacing:-1px!important;
+}
+
+.journey-meta>div{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:4px!important;
+}
+
+.journey-meta span{
+  color:#eef4f5!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:11px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  letter-spacing:1.4px!important;
+}
+
+.journey-meta small{
+  color:#71898f!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:12px!important;
+  line-height:1.2!important;
+  font-weight:500!important;
+}
+
 @media(min-width:901px){
   .journey{
-    padding:34px 40px 28px!important;
-  }
-
-  .journey-heading{
-    display:grid!important;
-    grid-template-columns:minmax(330px,460px) minmax(420px,1fr)!important;
-    grid-template-areas:
-      "label copy"
-      "title copy"!important;
-    column-gap:72px!important;
-    row-gap:10px!important;
-    align-items:end!important;
-
-    width:100%!important;
-    max-width:none!important;
-    margin:0 0 34px!important;
-  }
-
-  .journey-heading>.index{
-    grid-area:label!important;
-    margin:0!important;
-    align-self:end!important;
-  }
-
-  .journey-heading>h2{
-    grid-area:title!important;
-    margin:0!important;
-    max-width:none!important;
-  }
-
-  .journey-heading>p{
-    grid-area:copy!important;
-    align-self:end!important;
-
-    width:100%!important;
-    max-width:720px!important;
-    margin:0 0 2px auto!important;
-
-    font-size:15px!important;
-    line-height:1.6!important;
-    text-align:left!important;
-  }
-
-  .journey .timeline{
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
+    padding:38px 42px 30px!important;
   }
 }
 
 @media(max-width:900px){
   .journey-heading{
-    display:block!important;
-    width:100%!important;
+    grid-template-columns:1fr!important;
+    gap:22px!important;
+    margin-bottom:30px!important;
+  }
+
+  .journey-copy{
     max-width:none!important;
-    margin-bottom:28px!important;
   }
 
-  .journey-heading>.index{
-    display:block!important;
-    margin-bottom:10px!important;
-  }
-
-  .journey-heading>h2{
-    margin:0 0 14px!important;
-  }
-
-  .journey-heading>p{
-    width:100%!important;
+  .journey-copy>p{
     max-width:none!important;
-    margin:0!important;
+  }
+
+  .journey-meta{
+    justify-content:flex-start!important;
+    min-width:0!important;
+    padding:16px 0 0!important;
+    border-left:0!important;
+    border-top:1px solid rgba(255,255,255,.08)!important;
+  }
+
+  .journey-meta>strong{
+    font-size:52px!important;
+  }
+}
+
+@media(max-width:680px){
+  .journey{
+    padding:24px 20px!important;
+  }
+
+  .journey-heading{
+    gap:18px!important;
+    margin-bottom:26px!important;
+  }
+
+  .journey-meta{
+    gap:11px!important;
+    padding-top:14px!important;
+  }
+
+  .journey-meta>strong{
+    font-size:46px!important;
+  }
+
+  .journey-meta span{
+    font-size:10px!important;
+  }
+
+  .journey-meta small{
+    font-size:11px!important;
+  }
+}
+
+@media print{
+  .journey-meta{
+    display:none!important;
   }
 }
 </style></head>
@@ -931,7 +1002,20 @@
     <span class="polo-subline">digital ergänzt · im Detail ansehen</span>
   </p><button class="zoom-toggle" type="button" popovertarget="stitch-detail" aria-label="Stickerei anschauen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6M10 7v6M7 10h6"/></svg><span>Detail ansehen</span></button></div><div class="stitch-detail" id="stitch-detail" popover><div class="detail-head"><strong>Steckt Liebe im Detail.</strong><button type="button" class="zoom-close" popovertarget="stitch-detail" popovertargetaction="hide" aria-label="Vergrößerung schließen">—</button></div><div class="stitch-crop" role="img" aria-label="Vergrößerte Ansicht der digital ergänzten Logostickerei"></div><p>Die Stickerei ist digital. Die Erfahrung ist echt.</p></div></div>
 </section>
-<section class="journey" id="lebenslauf" aria-label="Mein Lebenslauf"><div class="journey-heading"><span class="index">MEIN LEBENSLAUF</span><h2>Mein Weg.<br>In vier Stationen.</h2><p>Hier sieht man die wichtigsten beruflichen Stationen – Punkt für Punkt bis heute.</p></div><div class="timeline"><article><div class="timeline-year">1963 <small>08.12.1963</small></div><div class="timeline-dot"></div><h3>Griechenland</h3><p>Bis zu meinem Umzug nach Deutschland im Jahr 1996 lebte ich in Griechenland.</p></article><article><div class="timeline-year">1996</div><div class="timeline-dot"></div><h3>Umzug nach Deutschland</h3><p>1996 bin ich nach Deutschland gezogen. Ein großer Teil meiner Familie lebte bereits hier.</p></article><article><div class="timeline-year">1998</div><div class="timeline-dot"></div><h3>Jannis Fußbodentechnik</h3><p>Seit 1998 selbstständig im Bodenhandwerk – für private und gewerbliche Kunden.</p></article><article><div class="timeline-year">2026</div><div class="timeline-dot"></div><h3>Zeit für einen Wechsel</h3><p>Nach fast 30 Jahren Selbstständigkeit möchte ich wieder fest angestellt arbeiten – verlässlich, praktisch und mit meiner ganzen Erfahrung.</p></article></div></section><section class="fit" aria-label="Meine Bewerbung auf einen Blick"><article><span class="index">01 / MEINE ERFAHRUNG</span><h2>Mehr drauf <br>als schöne Böden.</h2><p>Bodenhandwerk ist mein berufliches Fundament. Dazu kommt vielseitige praktische Erfahrung über das eigene Gewerk hinaus. Ich schaue mir an, was gebraucht wird, denke mit und packe an.</p></article><article><span class="index">02 / MEIN ANSPRUCH</span><h2>Werkzeug im Griff. <br>Menschen im Blick.</h2><p>Ein freundliches Wort gehört für mich genauso zum Einsatz wie das passende Werkzeug. Ich höre zu, spreche Arbeiten verständlich ab und gehe sorgsam mit dem Zuhause meiner Kunden um.</p></article><article><span class="index">03 / MEIN NÄCHSTER SCHRITT</span><h2>Erfahrung mitbringen. <br>Neues lernen.</h2><p>Messgeräte, Rauchwarnmelder und die digitale Dokumentation sind für mich ein neues Lernfeld. Ich bringe handwerkliche Praxis mit und nehme die Einarbeitung ernst.</p></article></section>
+<section class="journey" id="lebenslauf" aria-label="Mein Lebenslauf"><div class="journey-heading">
+    <div class="journey-copy">
+      <span class="index">MEIN LEBENSLAUF</span>
+      <h2>Mein Weg.<br>In vier Stationen.</h2>
+      <p>Die wichtigsten Stationen meines Weges – vom Aufwachsen in Griechenland bis zu meinem nächsten beruflichen Schritt.</p>
+    </div>
+    <div class="journey-meta" aria-label="Vier Stationen von 1963 bis heute">
+      <strong>4</strong>
+      <div>
+        <span>STATIONEN</span>
+        <small>1963 → heute</small>
+      </div>
+    </div>
+  </div><div class="timeline"><article><div class="timeline-year">1963 <small>08.12.1963</small></div><div class="timeline-dot"></div><h3>Griechenland</h3><p>Bis zu meinem Umzug nach Deutschland im Jahr 1996 lebte ich in Griechenland.</p></article><article><div class="timeline-year">1996</div><div class="timeline-dot"></div><h3>Umzug nach Deutschland</h3><p>1996 bin ich nach Deutschland gezogen. Ein großer Teil meiner Familie lebte bereits hier.</p></article><article><div class="timeline-year">1998</div><div class="timeline-dot"></div><h3>Jannis Fußbodentechnik</h3><p>Seit 1998 selbstständig im Bodenhandwerk – für private und gewerbliche Kunden.</p></article><article><div class="timeline-year">2026</div><div class="timeline-dot"></div><h3>Zeit für einen Wechsel</h3><p>Nach fast 30 Jahren Selbstständigkeit möchte ich wieder fest angestellt arbeiten – verlässlich, praktisch und mit meiner ganzen Erfahrung.</p></article></div></section><section class="fit" aria-label="Meine Bewerbung auf einen Blick"><article><span class="index">01 / MEINE ERFAHRUNG</span><h2>Mehr drauf <br>als schöne Böden.</h2><p>Bodenhandwerk ist mein berufliches Fundament. Dazu kommt vielseitige praktische Erfahrung über das eigene Gewerk hinaus. Ich schaue mir an, was gebraucht wird, denke mit und packe an.</p></article><article><span class="index">02 / MEIN ANSPRUCH</span><h2>Werkzeug im Griff. <br>Menschen im Blick.</h2><p>Ein freundliches Wort gehört für mich genauso zum Einsatz wie das passende Werkzeug. Ich höre zu, spreche Arbeiten verständlich ab und gehe sorgsam mit dem Zuhause meiner Kunden um.</p></article><article><span class="index">03 / MEIN NÄCHSTER SCHRITT</span><h2>Erfahrung mitbringen. <br>Neues lernen.</h2><p>Messgeräte, Rauchwarnmelder und die digitale Dokumentation sind für mich ein neues Lernfeld. Ich bringe handwerkliche Praxis mit und nehme die Einarbeitung ernst.</p></article></section>
 <section class="work-reference" aria-label="Arbeitsproben">
   <div class="work-reference-copy">
     <span class="index">ARBEITSPROBEN</span>
