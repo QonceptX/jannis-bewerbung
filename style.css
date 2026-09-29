@@ -1136,3 +1136,135 @@ h1{
     padding-right:20px!important;
   }
 }
+
+
+/* === TYPOGRAFIE V4 · wirklich kompakt, Rubrik führt === */
+@media (min-width:901px){
+
+  /* Rubriken sichtbar, aber nicht riesig */
+  .journey-heading>.index,
+  .why-now .question,
+  .bars-intro>.index,
+  .note-top .index,
+  .closing-cta>.index,
+  .fit .index{
+    font-family:Manrope,Arial,sans-serif!important;
+    font-size:15px!important;
+    font-weight:800!important;
+    line-height:1.15!important;
+    letter-spacing:1.7px!important;
+    color:var(--cyan)!important;
+    margin:0 0 10px!important;
+    text-transform:uppercase!important;
+  }
+
+  /* Weiße Abschnittstitel deutlich kleiner */
+  .journey-heading h2,
+  .why-now h2,
+  .bars-intro h2,
+  .closing-cta h2{
+    font-family:Manrope,Arial,sans-serif!important;
+    font-size:24px!important;
+    line-height:1.16!important;
+    font-weight:800!important;
+    letter-spacing:-.55px!important;
+    margin:0 0 10px!important;
+    max-width:760px!important;
+  }
+
+  /* Inhaltstitel */
+  .fit h2,
+  .note-body h2{
+    font-family:Manrope,Arial,sans-serif!important;
+    font-size:20px!important;
+    line-height:1.18!important;
+    font-weight:800!important;
+    letter-spacing:-.4px!important;
+  }
+
+  /* Fließtext */
+  .journey-heading p,
+  .why-now p,
+  .closing-cta p,
+  .note-body p,
+  .fit p,
+  .profile-bars .language-note{
+    font-size:13px!important;
+    line-height:1.55!important;
+  }
+
+  /* gesamte Seite kompakter */
+  .application{
+    max-width:1220px!important;
+    padding-left:40px!important;
+    padding-right:40px!important;
+  }
+
+  .application>section:not(.intro){
+    margin-top:18px!important;
+    margin-bottom:18px!important;
+  }
+
+  .journey{
+    padding:20px 24px 12px!important;
+  }
+
+  .why-now,
+  .profile-bars,
+  .fit{
+    padding:22px 24px!important;
+  }
+
+  .family-note{
+    padding:18px 22px!important;
+  }
+
+  .closing-cta{
+    padding:20px 24px!important;
+  }
+
+  .closing{
+    padding-top:18px!important;
+    padding-bottom:18px!important;
+  }
+
+  .why-now{
+    gap:28px!important;
+  }
+
+  .journey-heading p{
+    margin-bottom:10px!important;
+  }
+
+  .journey .timeline h3{
+    font-size:13.5px!important;
+  }
+
+  .journey .timeline p{
+    font-size:11px!important;
+    line-height:1.42!important;
+  }
+}
+
+@media (max-width:900px){
+  .journey-heading>.index,
+  .why-now .question,
+  .bars-intro>.index,
+  .note-top .index,
+  .closing-cta>.index,
+  .fit .index{
+    font-size:13px!important;
+  }
+
+  .journey-heading h2,
+  .why-now h2,
+  .bars-intro h2,
+  .closing-cta h2{
+    font-size:23px!important;
+  }
+
+  .fit h2,
+  .note-body h2{
+    font-size:19px!important;
+  }
+}
