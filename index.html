@@ -27,7 +27,7 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
   let wheelLocked=false;
   let lockActive=false;
   let savedY=0;
-  let touchStartY=null;
+  let bypassLock=false;
 
   const getDotGeometry=()=>{
     const tr=timeline.getBoundingClientRect();
@@ -61,7 +61,7 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
   };
 
   const lockPage=()=>{
-    if(lockActive||!desktop.matches) return;
+    if(lockActive||!desktop.matches||bypassLock) return;
     lockActive=true;
     savedY=window.scrollY;
     document.documentElement.classList.add('timeline-locked');
@@ -75,16 +75,17 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
     document.documentElement.classList.remove('timeline-locked');
     document.body.classList.remove('timeline-locked');
     document.body.style.top='';
-    window.scrollTo(0,savedY);
     lockActive=false;
+    window.scrollTo(0,savedY);
   };
 
   const enterTimelineIfNeeded=()=>{
-    if(!desktop.matches||lockActive) return;
+    if(!desktop.matches||lockActive||bypassLock) return;
     const r=journey.getBoundingClientRect();
-    const trigger=window.innerHeight*0.28;
-    if(r.top<=trigger && r.bottom>trigger+180){
-      const targetY=window.scrollY+r.top-70;
+    const trigger=window.innerHeight*.34;
+
+    if(r.top<=trigger && r.bottom>trigger+120){
+      const targetY=Math.max(0,window.scrollY+r.top-54);
       window.scrollTo({top:targetY,behavior:'auto'});
       savedY=targetY;
       if(step<0) step=0;
@@ -92,32 +93,50 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
     }
   };
 
+  const leaveTimelineDown=()=>{
+    bypassLock=true;
+    unlockPage();
+
+    const next=journey.nextElementSibling;
+    if(next){
+      const top=next.getBoundingClientRect().top+window.scrollY-22;
+      window.scrollTo({top,behavior:'smooth'});
+    }
+
+    window.setTimeout(()=>{
+      bypassLock=false;
+    },900);
+  };
+
+  const leaveTimelineUp=()=>{
+    bypassLock=true;
+    unlockPage();
+    step=-1;
+    renderStep();
+
+    const top=Math.max(0,journey.offsetTop-window.innerHeight*.45);
+    window.scrollTo({top,behavior:'smooth'});
+
+    window.setTimeout(()=>{
+      bypassLock=false;
+    },900);
+  };
+
   const advance=(direction)=>{
     if(direction>0){
       if(step<timelineItems.length-1){
         step++;
         renderStep();
-        return true;
+      }else{
+        leaveTimelineDown();
       }
-      unlockPage();
-      const next=journey.nextElementSibling;
-      if(next){
-        const top=next.getBoundingClientRect().top+window.scrollY-24;
-        window.scrollTo({top,behavior:'smooth'});
-      }
-      return false;
     }else{
       if(step>0){
         step--;
         renderStep();
-        return true;
+      }else{
+        leaveTimelineUp();
       }
-      unlockPage();
-      const prevY=Math.max(0,journey.offsetTop-window.innerHeight*.45);
-      window.scrollTo({top:prevY,behavior:'smooth'});
-      step=-1;
-      renderStep();
-      return false;
     }
   };
 
@@ -141,7 +160,7 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
 
     wheelLocked=true;
     advance(direction);
-    window.setTimeout(()=>{wheelLocked=false;},420);
+    window.setTimeout(()=>{wheelLocked=false;},360);
   },{passive:false});
 
   window.addEventListener('keydown',event=>{
@@ -159,30 +178,15 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
     advance(down?1:-1);
   });
 
-  window.addEventListener('touchstart',event=>{
-    if(!desktop.matches||!lockActive) return;
-    touchStartY=event.touches[0].clientY;
-  },{passive:true});
-
-  window.addEventListener('touchmove',event=>{
-    if(!desktop.matches||!lockActive||touchStartY===null) return;
-    event.preventDefault();
-  },{passive:false});
-
-  window.addEventListener('touchend',event=>{
-    if(!desktop.matches||!lockActive||touchStartY===null) return;
-    const endY=event.changedTouches[0].clientY;
-    const diff=touchStartY-endY;
-    touchStartY=null;
-    if(Math.abs(diff)>24) advance(diff>0?1:-1);
-  });
-
   window.addEventListener('resize',renderStep);
+
   if(desktop.addEventListener){
     desktop.addEventListener('change',()=>{
+      bypassLock=true;
       unlockPage();
       step=desktop.matches?-1:timelineItems.length-1;
       renderStep();
+      window.setTimeout(()=>{bypassLock=false;},250);
     });
   }
 
