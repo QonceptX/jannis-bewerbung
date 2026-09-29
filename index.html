@@ -29,24 +29,29 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
   let savedY=0;
   let touchStartY=null;
 
-  const getDotCenters=()=>{
+  const getDotGeometry=()=>{
     const tr=timeline.getBoundingClientRect();
     return timelineDots.map(dot=>{
       const r=dot.getBoundingClientRect();
-      return r.left-tr.left+r.width/2;
+      return {
+        x:r.left-tr.left+r.width/2,
+        y:r.top-tr.top+r.height/2
+      };
     });
   };
 
   const renderStep=()=>{
-    const centers=getDotCenters();
-    if(centers.length>=2){
-      const first=centers[0];
-      const last=centers[centers.length-1];
+    const points=getDotGeometry();
+    if(points.length>=2){
+      const first=points[0].x;
+      const last=points[points.length-1].x;
+      const railY=points.reduce((sum,p)=>sum+p.y,0)/points.length;
       const progress=step<0?0:step/(timelineItems.length-1);
       const endX=first+(last-first)*progress;
       timeline.style.setProperty('--rail-left',first+'px');
       timeline.style.setProperty('--rail-width',(last-first)+'px');
       timeline.style.setProperty('--laser-width',Math.max(0,endX-first)+'px');
+      timeline.style.setProperty('--rail-y',railY+'px');
     }
 
     timelineItems.forEach((item,i)=>{
@@ -78,7 +83,7 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
     if(!desktop.matches||lockActive) return;
     const r=journey.getBoundingClientRect();
     const trigger=window.innerHeight*0.28;
-    if(r.top<=trigger && r.bottom>window.innerHeight*0.72){
+    if(r.top<=trigger && r.bottom>trigger+180){
       const targetY=window.scrollY+r.top-70;
       window.scrollTo({top:targetY,behavior:'auto'});
       savedY=targetY;
