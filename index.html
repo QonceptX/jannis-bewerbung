@@ -1339,117 +1339,143 @@
     font-size:5.5pt!important;
   }
 }
-</style><style id="final-photo-caption-v56">
-.portrait-caption-application{
-  display:block!important;
-  margin:0!important;
-  padding:18px 0 4px!important;
-  border:0!important;
-  background:transparent!important;
-}
-
-.portrait-caption-application p{
-  display:grid!important;
-  grid-template-columns:auto minmax(0,1fr)!important;
-  grid-template-areas:
-    "tag title"
-    "tag sub"!important;
-  column-gap:14px!important;
-  row-gap:3px!important;
-
-  margin:0!important;
-  min-width:0!important;
-}
-
-.portrait-caption-application .polo-kicker{
-  grid-area:tag!important;
-  align-self:center!important;
-
-  display:inline-flex!important;
+</style><style id="final-photo-caption-v57">
+.portrait-caption-mini{
+  display:flex!important;
   align-items:center!important;
-  justify-content:center!important;
-
-  min-width:auto!important;
-  height:auto!important;
+  justify-content:space-between!important;
+  gap:18px!important;
   margin:0!important;
-  padding:0!important;
-
+  padding:15px 0 3px!important;
   border:0!important;
-  border-radius:0!important;
   background:transparent!important;
-
-  color:var(--cyan)!important;
-  font-family:Manrope,Arial,sans-serif!important;
-  font-size:10px!important;
-  line-height:1.2!important;
-  font-weight:800!important;
-  letter-spacing:1.35px!important;
-  white-space:nowrap!important;
 }
-
-.portrait-caption-application strong{
-  grid-area:title!important;
-  display:block!important;
-
+.portrait-caption-mini p{
   margin:0!important;
-
+}
+.portrait-caption-mini p strong{
   color:#dfe8ea!important;
   font-family:Manrope,Arial,sans-serif!important;
   font-size:14px!important;
   line-height:1.35!important;
+  font-weight:500!important;
+}
+.zoom-toggle-mini{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  flex:0 0 auto!important;
+  min-height:38px!important;
+  padding:0 14px!important;
+  border:1px solid rgba(39,218,222,.26)!important;
+  border-radius:999px!important;
+  background:rgba(39,218,222,.04)!important;
+  color:#bfeff0!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.zoom-toggle-mini:hover{
+  background:rgba(39,218,222,.09)!important;
+  border-color:rgba(39,218,222,.48)!important;
+  transform:none!important;
+}
+.zoom-toggle-mini svg{
+  width:16px!important;
+  height:16px!important;
+}
+.zoom-toggle-mini span{
+  display:inline!important;
+  font-size:11px!important;
+  font-weight:700!important;
+  letter-spacing:.1px!important;
+}
+.stitch-detail-v57{
+  position:fixed!important;
+  inset:0!important;
+  margin:auto!important;
+  width:min(360px,calc(100vw - 34px))!important;
+  height:fit-content!important;
+  padding:14px!important;
+  color:#eef5f6!important;
+  background:#13292f!important;
+  border:1px solid rgba(39,218,222,.42)!important;
+  border-radius:14px!important;
+  box-shadow:0 20px 70px rgba(0,0,0,.45)!important;
+}
+.stitch-detail-v57:not(:popover-open){
+  display:none!important;
+}
+.stitch-detail-v57:popover-open{
+  display:block!important;
+}
+.stitch-detail-v57::backdrop{
+  background:rgba(3,19,23,.58)!important;
+  backdrop-filter:blur(4px)!important;
+}
+.stitch-detail-v57 .detail-head{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:14px!important;
+  margin-bottom:10px!important;
+}
+.stitch-detail-v57 .detail-head strong{
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:14px!important;
   font-weight:600!important;
 }
-
-.portrait-caption-application .polo-subline{
-  grid-area:sub!important;
-  display:block!important;
-
-  margin:0!important;
-
-  color:#7f969d!important;
-  font-family:Manrope,Arial,sans-serif!important;
-  font-size:11px!important;
-  line-height:1.45!important;
-  font-weight:400!important;
+.stitch-detail-v57 .zoom-close{
+  border:0!important;
+  background:transparent!important;
+  color:#dce9eb!important;
+  font-size:22px!important;
+  line-height:1!important;
+  cursor:pointer!important;
 }
-
-.portrait-caption-application::before,
-.portrait-caption-application::after{
-  content:none!important;
-  display:none!important;
+.stitch-detail-v57 .stitch-crop{
+  height:190px!important;
+  border-radius:8px!important;
+  background-image:url('portraet-jannis-clean-v2.webp')!important;
+  background-size:400% auto!important;
+  background-position:79% 77%!important;
+  background-repeat:no-repeat!important;
+  background-color:#263037!important;
+}
+.stitch-detail-v57>p{
+  margin:9px 2px 1px!important;
+  color:#81969c!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:10px!important;
+  line-height:1.4!important;
 }
 
 @media(max-width:680px){
-  .portrait-caption-application{
-    padding-top:14px!important;
+  .portrait-caption-mini{
+    gap:10px!important;
+    padding-top:12px!important;
   }
-
-  .portrait-caption-application p{
-    grid-template-columns:1fr!important;
-    grid-template-areas:
-      "tag"
-      "title"
-      "sub"!important;
-    row-gap:5px!important;
-  }
-
-  .portrait-caption-application .polo-kicker{
-    justify-self:start!important;
-    font-size:9px!important;
-  }
-
-  .portrait-caption-application strong{
+  .portrait-caption-mini p strong{
     font-size:13px!important;
   }
-
-  .portrait-caption-application .polo-subline{
-    font-size:11px!important;
-    line-height:1.45!important;
+  .zoom-toggle-mini{
+    width:36px!important;
+    min-width:36px!important;
+    height:36px!important;
+    min-height:36px!important;
+    padding:0!important;
+  }
+  .zoom-toggle-mini span{
+    display:none!important;
+  }
+  .zoom-toggle-mini svg{
+    width:17px!important;
+    height:17px!important;
   }
 }
-
 @media print{
-  .portrait-caption-application{
+  .portrait-caption-mini,
+  .stitch-detail-v57{
     display:none!important;
   }
 }
@@ -1474,12 +1500,20 @@
     <span class="experience-kicker">SEIT</span>
     <strong>1998</strong>
     <span class="experience-caption">IM HANDWERK</span>
-  </div></div><div class="portrait-caption portrait-caption-application">
-    <p>
-      <span class="polo-kicker">MITGEDACHT BIS INS DETAIL</span>
-      <strong>Das Express-Service-Logo auf dem Polo ist digital ergänzt.</strong>
-      <span class="polo-subline">Nicht, weil ich schon Mitarbeiter bin – sondern weil ich mir gut vorstellen kann, einer zu werden.</span>
-    </p>
+  </div></div><div class="portrait-caption portrait-caption-mini">
+    <p><strong>Den Team-Look habe ich schon mal anprobiert.</strong></p>
+    <button class="zoom-toggle zoom-toggle-mini" type="button" popovertarget="stitch-detail-v57" aria-label="Polo im Detail ansehen">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6M10 7v6M7 10h6"/></svg>
+      <span>Genauer hinsehen</span>
+    </button>
+  </div>
+  <div class="stitch-detail stitch-detail-v57" id="stitch-detail-v57" popover>
+    <div class="detail-head">
+      <strong>Nur mal kurz genauer hingeschaut.</strong>
+      <button type="button" class="zoom-close" popovertarget="stitch-detail-v57" popovertargetaction="hide" aria-label="Detailansicht schließen">×</button>
+    </div>
+    <div class="stitch-crop" role="img" aria-label="Vergrößerte Ansicht des Polo-Logos"></div>
+    <p>Logo digital ergänzt.</p>
   </div></div>
 </section>
 <section class="journey" id="lebenslauf" aria-label="Mein Lebenslauf"><div class="journey-heading">
