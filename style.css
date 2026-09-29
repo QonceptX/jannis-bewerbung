@@ -545,3 +545,31 @@ body.timeline-locked{
     transform:translateY(-2px)!important;
   }
 }
+
+
+/* === TIMELINE FINAL V5 · exakte Mitte + kompakter Kasten === */
+@media (min-width:901px){
+  .journey{
+    min-height:0!important;
+    padding:42px 38px 24px!important;
+  }
+
+  .journey-heading p{
+    margin-bottom:28px!important;
+  }
+
+  .journey .timeline{
+    --rail-y:0px;
+    padding:14px 0 4px!important;
+  }
+
+  .journey .timeline::before,
+  .journey .timeline::after{
+    top:var(--rail-y)!important;
+    transform:translateY(-50%)!important;
+  }
+
+  .journey .timeline p{
+    margin-bottom:0!important;
+  }
+}
