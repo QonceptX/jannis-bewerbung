@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="de">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jannis Tsopanoglou · Ihr nächster Servicetechniker</title><meta name="site-build" content="ending-v61"><meta name="description" content="Handwerker seit 1998. Meine Bewerbung als Servicetechniker in Bonn-Beuel."><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23131e23'/%3E%3Ctext x='12' y='30' font-family='Arial' font-size='30' fill='%2324d9dc'%3EJ%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="style-v38.css?v=6101"><style id="final-reading-type">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jannis Tsopanoglou · Ihr nächster Servicetechniker</title><meta name="site-build" content="closing-cards-v62"><meta name="description" content="Handwerker seit 1998. Meine Bewerbung als Servicetechniker in Bonn-Beuel."><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23131e23'/%3E%3Ctext x='12' y='30' font-family='Arial' font-size='30' fill='%2324d9dc'%3EJ%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="style-v38.css?v=6201"><style id="final-reading-type">
 .letter,.letter p,.journey-heading p,.why-now p,.fit p,.note-body p,.profile-bars .language-note,.closing-cta p{
   font-family:Manrope,Arial,sans-serif!important;
   font-size:18px!important;
@@ -1914,6 +1914,144 @@
 
   .contact-footer::after{
     display:none!important;
+  }
+}
+</style><style id="final-closing-card-unify-v62">
+/* === V62 · Persönlich gemacht + Arbeitsproben als ein Designsystem === */
+.closing .family-note-v2,
+.closing .work-reference{
+  position:relative!important;
+
+  display:grid!important;
+  align-items:center!important;
+
+  width:100%!important;
+  margin:0!important;
+  padding:30px 34px!important;
+
+  border:1px solid rgba(255,255,255,.08)!important;
+  border-left:3px solid var(--cyan)!important;
+  border-radius:14px!important;
+
+  background:
+    linear-gradient(110deg,rgba(24,46,53,.84),rgba(15,31,37,.90))!important;
+
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+
+/* alte Sonderkante von Persönlich gemacht raus */
+.closing .family-note-v2::before{
+  display:none!important;
+  content:none!important;
+}
+
+/* identischer Abstand zwischen den beiden Karten */
+.closing{
+  gap:22px!important;
+}
+
+/* gleiche Rubrik-Hierarchie */
+.closing .family-note-copy>.index,
+.closing .work-reference-copy>.index{
+  display:block!important;
+  margin:0 0 11px!important;
+
+  color:var(--cyan)!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:16px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  letter-spacing:1.35px!important;
+}
+
+/* gleiche weiße Titel-Hierarchie */
+.closing .family-note-copy h2,
+.closing .work-reference-copy strong{
+  display:block!important;
+  margin:0 0 10px!important;
+
+  color:#f1f6f7!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:23px!important;
+  line-height:1.27!important;
+  font-weight:500!important;
+  letter-spacing:-.3px!important;
+}
+
+/* gleiche Leseschrift */
+.closing .family-note-copy p,
+.closing .work-reference-copy p{
+  margin:0!important;
+  max-width:760px!important;
+
+  color:#aebfc4!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:15px!important;
+  line-height:1.6!important;
+  font-weight:400!important;
+}
+
+/* Inhalte rechts jeweils sauber ausrichten */
+.closing .family-note-v2{
+  grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr)!important;
+  gap:48px!important;
+}
+
+.closing .work-reference{
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:48px!important;
+}
+
+.closing .family-note-people{
+  padding-left:28px!important;
+  border-left:1px solid rgba(255,255,255,.08)!important;
+}
+
+.closing .work-reference-link{
+  min-height:44px!important;
+  padding:0 17px!important;
+  border:1px solid rgba(39,218,222,.26)!important;
+  border-radius:999px!important;
+  background:rgba(39,218,222,.04)!important;
+}
+
+@media(max-width:1100px){
+  .closing .family-note-v2,
+  .closing .work-reference{
+    grid-template-columns:1fr!important;
+    gap:22px!important;
+  }
+
+  .closing .family-note-people{
+    padding:20px 0 0!important;
+    border-left:0!important;
+    border-top:1px solid rgba(255,255,255,.08)!important;
+  }
+}
+
+@media(max-width:680px){
+  .closing .family-note-v2,
+  .closing .work-reference{
+    padding:24px 20px!important;
+    border-radius:12px!important;
+  }
+
+  .closing .family-note-copy>.index,
+  .closing .work-reference-copy>.index{
+    font-size:15px!important;
+    margin-bottom:10px!important;
+  }
+
+  .closing .family-note-copy h2,
+  .closing .work-reference-copy strong{
+    font-size:21px!important;
+  }
+
+  .closing .family-note-copy p,
+  .closing .work-reference-copy p{
+    font-size:17px!important;
+    line-height:1.6!important;
   }
 }
 </style></head>
