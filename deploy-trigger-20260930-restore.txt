@@ -1,0 +1,2 @@
+restore-full-site-2026-09-30T13-45
+Index restored to full pre-reset version. This file only triggers GitHub Pages redeploy.
