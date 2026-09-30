@@ -1,0 +1,57 @@
+name: Patch Timeline Wheel Only
+
+on:
+  push:
+    paths:
+      - '.github/workflows/patch-timeline-wheel-only.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch timeline scroll behavior
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          old_scroll = """  window.addEventListener('scroll',()=>{\n    if(desktop.matches){\n      if(!locked)enter();\n    }else{\n      renderMobile();\n    }\n  },{passive:true});"""
+          new_scroll = """  window.addEventListener('scroll',()=>{\n    // Desktop: normales Scrollen über Seitenleiste/Scrollbar darf nicht in die Timeline einrasten.\n    // Der Timeline-Stopp wird nur über echte Wheel-/Trackpad-Ereignisse ausgelöst.\n    if(!desktop.matches){\n      renderMobile();\n    }\n  },{passive:true});"""
+
+          old_keydown = """  window.addEventListener('keydown',event=>{\n    if(!desktop.matches)return;\n    const down=['ArrowDown','PageDown',' '].includes(event.key);\n    const up=['ArrowUp','PageUp','Home'].includes(event.key);\n    if(!down&&!up)return;\n    if(!locked){\n      enter();\n      if(!locked)return;\n    }\n    event.preventDefault();\n    move(down?1:-1);\n  });"""
+          new_keydown = """  window.addEventListener('keydown',event=>{\n    // Kein automatischer Timeline-Lock per Tastatur: Seiten-/Scrollbar-Navigation bleibt normal.\n    // Die geführte Timeline reagiert auf dem Desktop bewusst nur auf Mausrad/Trackpad.\n    if(!desktop.matches||!locked)return;\n    const down=['ArrowDown','PageDown',' '].includes(event.key);\n    const up=['ArrowUp','PageUp','Home'].includes(event.key);\n    if(!down&&!up)return;\n    event.preventDefault();\n    move(down?1:-1);\n  });"""
+
+          changed = False
+          if old_scroll in text:
+              text = text.replace(old_scroll, new_scroll, 1)
+              changed = True
+          else:
+              raise SystemExit('Scroll block not found')
+
+          if old_keydown in text:
+              text = text.replace(old_keydown, new_keydown, 1)
+              changed = True
+
+          # Kleiner Build-Marker, damit GitHub Pages sicher neu ausliefert.
+          text = text.replace('closing-cards-v62', 'closing-cards-v62-wheel-only', 1)
+
+          if changed:
+              path.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit patch
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Timeline nur per Mausrad einrasten lassen"
+          git push
