@@ -1,6 +1,6 @@
 @import url('style-v37.css?v=3701');
 
-/* V69 · Experience als echtes Premium-Panel unter dem Foto – kein Foto-Balken mehr */
+/* V70 · Experience als echtes Premium-Panel unter dem Foto – kein Foto-Balken mehr */
 .experience,
 .photo .experience,
 .visual .experience,
@@ -175,6 +175,27 @@ html body main.application section.closing aside.family-note.family-note-v2 div.
 
 html body main.application section.closing aside.family-note.family-note-v2 div.family-note-people{
   grid-template-columns:1fr!important;
+}
+
+/* V70 · Abschlusskasten entfernen: Kontakt/Footer übernimmt den Schluss */
+html body main.application section.closing .final-note,
+html body main.application section.closing div.final-note,
+html body main.application div.final-note,
+html body main.application .final-note{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  height:0!important;
+  min-height:0!important;
+  max-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  overflow:hidden!important;
+}
+
+html body main.application section.closing{
+  gap:22px!important;
 }
 
 @media(max-width:680px){
