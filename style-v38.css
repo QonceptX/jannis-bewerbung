@@ -1,7 +1,6 @@
 @import url('style-v37.css?v=3701');
 
-/* V66 · NOT-AUS: 1998/Experience-Overlay im Foto vollständig entfernen.
-   Breit gesetzt, damit alte Inline-Styles und alte Klassen nicht mehr sichtbar bleiben. */
+/* V67 · Experience: kein Foto-Balken mehr, sondern ein hochwertiges kleines Siegel unter dem Foto */
 .experience,
 .photo .experience,
 .visual .experience,
@@ -22,7 +21,6 @@
   box-shadow:none!important;
 }
 
-/* Selbst wenn spätere Styles display/width/background wieder setzen: Inhalt bleibt unsichtbar. */
 .experience *,
 .photo .experience *,
 .visual .experience *{
@@ -35,7 +33,6 @@
   box-shadow:none!important;
 }
 
-/* Alte Bild-Pseudoelemente sicher neutralisieren. */
 .photo::before,
 .photo::after{
   content:none!important;
@@ -44,67 +41,104 @@
   opacity:0!important;
 }
 
-/* Ruhige Infozeile unter dem Foto statt Balken im Foto. */
-.portrait-caption-mini{
+html body main.application section.intro div.visual div.portrait-caption-mini{
   display:grid!important;
-  grid-template-columns:minmax(0,1fr) auto!important;
+  grid-template-columns:auto minmax(0,1fr) auto!important;
   align-items:center!important;
   gap:18px!important;
   margin:0!important;
-  padding:18px 0 4px!important;
+  padding:19px 0 4px!important;
   border:0!important;
   background:transparent!important;
 }
 
-.portrait-caption-mini::before{
-  content:'SEIT 1998 · IM HANDWERK'!important;
+html body main.application section.intro div.visual div.portrait-caption-mini::before{
+  content:'1998'!important;
   display:inline-flex!important;
   align-items:center!important;
   justify-content:center!important;
   justify-self:start!important;
-  height:32px!important;
-  padding:0 13px!important;
-  border:1px solid rgba(39,218,222,.24)!important;
-  border-radius:999px!important;
-  background:rgba(39,218,222,.045)!important;
+  width:92px!important;
+  height:62px!important;
+  margin:0!important;
+  padding:0 0 3px!important;
+  border:1px solid rgba(39,218,222,.30)!important;
+  border-left:4px solid var(--cyan)!important;
+  border-radius:13px!important;
+  background:
+    radial-gradient(circle at 80% 20%,rgba(39,218,222,.16),transparent 34%),
+    linear-gradient(135deg,rgba(17,48,56,.92),rgba(9,28,34,.96))!important;
   color:var(--cyan)!important;
+  font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif!important;
+  font-size:45px!important;
+  line-height:.78!important;
+  font-weight:800!important;
+  letter-spacing:-.7px!important;
+  white-space:nowrap!important;
+  visibility:visible!important;
+  opacity:1!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.14)!important;
+}
+
+html body main.application section.intro div.visual div.portrait-caption-mini p{
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  gap:5px!important;
+  min-width:0!important;
+  margin:0!important;
+}
+
+html body main.application section.intro div.visual div.portrait-caption-mini p::before{
+  content:'SEIT · IM HANDWERK'!important;
+  display:block!important;
+  color:#7f9aa1!important;
   font-family:Manrope,Arial,sans-serif!important;
-  font-size:10px!important;
+  font-size:9px!important;
   line-height:1!important;
   font-weight:800!important;
-  letter-spacing:1.25px!important;
-  white-space:nowrap!important;
+  letter-spacing:1.45px!important;
   visibility:visible!important;
   opacity:1!important;
 }
 
-.portrait-caption-mini p{
+html body main.application section.intro div.visual div.portrait-caption-mini p strong{
+  display:block!important;
   margin:0!important;
+  color:#e6eff1!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:15px!important;
+  line-height:1.35!important;
+  font-weight:520!important;
+  letter-spacing:-.1px!important;
 }
 
-.portrait-caption-mini p strong{
-  color:#dfe8ea!important;
-  font-family:Manrope,Arial,sans-serif!important;
-  font-size:14px!important;
-  line-height:1.35!important;
-  font-weight:500!important;
+html body main.application section.intro div.visual div.portrait-caption-mini .zoom-toggle-mini,
+html body main.application section.intro div.visual div.portrait-caption-mini button{
+  align-self:center!important;
 }
 
 @media(max-width:680px){
-  .portrait-caption-mini{
-    grid-template-columns:1fr auto!important;
-    gap:10px!important;
-    padding-top:13px!important;
+  html body main.application section.intro div.visual div.portrait-caption-mini{
+    grid-template-columns:auto minmax(0,1fr) auto!important;
+    gap:12px!important;
+    padding-top:14px!important;
   }
 
-  .portrait-caption-mini::before{
-    height:28px!important;
-    padding:0 10px!important;
-    font-size:8.5px!important;
-    letter-spacing:.95px!important;
+  html body main.application section.intro div.visual div.portrait-caption-mini::before{
+    width:76px!important;
+    height:54px!important;
+    border-radius:11px!important;
+    font-size:37px!important;
   }
 
-  .portrait-caption-mini p strong{
+  html body main.application section.intro div.visual div.portrait-caption-mini p::before{
+    font-size:8px!important;
+    letter-spacing:1.05px!important;
+  }
+
+  html body main.application section.intro div.visual div.portrait-caption-mini p strong{
     font-size:13px!important;
+    line-height:1.32!important;
   }
 }
