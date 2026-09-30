@@ -1,2 +1,110 @@
 @import url('style-v37.css?v=3701');
-@import url('style-v39.css?v=3901');
+
+/* V66 · NOT-AUS: 1998/Experience-Overlay im Foto vollständig entfernen.
+   Breit gesetzt, damit alte Inline-Styles und alte Klassen nicht mehr sichtbar bleiben. */
+.experience,
+.photo .experience,
+.visual .experience,
+.intro .experience,
+[class~="experience"],
+[class*="experience-live"],
+.experience::before,
+.experience::after,
+.photo .experience::before,
+.photo .experience::after,
+.visual .experience::before,
+.visual .experience::after{
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  filter:none!important;
+  text-shadow:none!important;
+  box-shadow:none!important;
+}
+
+/* Selbst wenn spätere Styles display/width/background wieder setzen: Inhalt bleibt unsichtbar. */
+.experience *,
+.photo .experience *,
+.visual .experience *{
+  visibility:hidden!important;
+  opacity:0!important;
+  color:transparent!important;
+  background:transparent!important;
+  border-color:transparent!important;
+  text-shadow:none!important;
+  box-shadow:none!important;
+}
+
+/* Alte Bild-Pseudoelemente sicher neutralisieren. */
+.photo::before,
+.photo::after{
+  content:none!important;
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+}
+
+/* Ruhige Infozeile unter dem Foto statt Balken im Foto. */
+.portrait-caption-mini{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:18px!important;
+  margin:0!important;
+  padding:18px 0 4px!important;
+  border:0!important;
+  background:transparent!important;
+}
+
+.portrait-caption-mini::before{
+  content:'SEIT 1998 · IM HANDWERK'!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  justify-self:start!important;
+  height:32px!important;
+  padding:0 13px!important;
+  border:1px solid rgba(39,218,222,.24)!important;
+  border-radius:999px!important;
+  background:rgba(39,218,222,.045)!important;
+  color:var(--cyan)!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:10px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  letter-spacing:1.25px!important;
+  white-space:nowrap!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+
+.portrait-caption-mini p{
+  margin:0!important;
+}
+
+.portrait-caption-mini p strong{
+  color:#dfe8ea!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:14px!important;
+  line-height:1.35!important;
+  font-weight:500!important;
+}
+
+@media(max-width:680px){
+  .portrait-caption-mini{
+    grid-template-columns:1fr auto!important;
+    gap:10px!important;
+    padding-top:13px!important;
+  }
+
+  .portrait-caption-mini::before{
+    height:28px!important;
+    padding:0 10px!important;
+    font-size:8.5px!important;
+    letter-spacing:.95px!important;
+  }
+
+  .portrait-caption-mini p strong{
+    font-size:13px!important;
+  }
+}
