@@ -1,6 +1,6 @@
 @import url('style-v37.css?v=3701');
 
-/* V68 · Experience als echtes Premium-Panel unter dem Foto – kein Foto-Balken mehr */
+/* V69 · Experience als echtes Premium-Panel unter dem Foto – kein Foto-Balken mehr */
 .experience,
 .photo .experience,
 .visual .experience,
@@ -147,6 +147,36 @@ html body main.application section.intro div.visual div.portrait-caption-mini bu
   background:rgba(39,218,222,.055)!important;
 }
 
+/* V69 · Familienprojekt: Schwiegersohn ohne Namensnennung */
+html body main.application section.closing aside.family-note.family-note-v2 div.family-note-copy p{
+  font-size:0!important;
+  line-height:0!important;
+  color:transparent!important;
+}
+
+html body main.application section.closing aside.family-note.family-note-v2 div.family-note-copy p::after{
+  content:'Die Erfahrung, die Geschichten und die Motivation kommen von mir. Bei Idee, Gestaltung und technischer Umsetzung dieser Seite hat mir mein Schwiegersohn sehr geholfen.'!important;
+  display:block!important;
+  margin:0!important;
+  max-width:760px!important;
+  color:#aebfc4!important;
+  font-family:Manrope,Arial,sans-serif!important;
+  font-size:15px!important;
+  line-height:1.6!important;
+  font-weight:400!important;
+}
+
+html body main.application section.closing aside.family-note.family-note-v2 div.family-note-people span.family-link,
+html body main.application section.closing aside.family-note.family-note-v2 div.family-note-people span.family-link + div.family-person{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+}
+
+html body main.application section.closing aside.family-note.family-note-v2 div.family-note-people{
+  grid-template-columns:1fr!important;
+}
+
 @media(max-width:680px){
   html body main.application section.intro div.visual div.portrait-caption-mini{
     grid-template-columns:auto minmax(0,1fr) auto!important;
@@ -180,5 +210,10 @@ html body main.application section.intro div.visual div.portrait-caption-mini bu
     height:38px!important;
     min-height:38px!important;
     padding:0!important;
+  }
+
+  html body main.application section.closing aside.family-note.family-note-v2 div.family-note-copy p::after{
+    font-size:17px!important;
+    line-height:1.6!important;
   }
 }
