@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="de">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jannis Tsopanoglou · Ihr nächster Servicetechniker</title><meta name="site-build" content="closing-cards-v62"><meta name="description" content="Handwerker seit 1998. Meine Bewerbung als Servicetechniker in Bonn-Beuel."><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23131e23'/%3E%3Ctext x='12' y='30' font-family='Arial' font-size='30' fill='%2324d9dc'%3EJ%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="style-v38.css?v=6201"><style id="final-reading-type">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jannis Tsopanoglou · Ihr nächster Servicetechniker</title><meta name="site-build" content="closing-cards-v62-wheel-only"><meta name="description" content="Handwerker seit 1998. Meine Bewerbung als Servicetechniker in Bonn-Beuel."><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23131e23'/%3E%3Ctext x='12' y='30' font-family='Arial' font-size='30' fill='%2324d9dc'%3EJ%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="style-v38.css?v=6201"><style id="final-reading-type">
 .letter,.letter p,.journey-heading p,.why-now p,.fit p,.note-body p,.profile-bars .language-note,.closing-cta p{
   font-family:Manrope,Arial,sans-serif!important;
   font-size:18px!important;
@@ -2332,9 +2332,9 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
   };
 
   window.addEventListener('scroll',()=>{
-    if(desktop.matches){
-      if(!locked)enter();
-    }else{
+    // Desktop: normales Scrollen über Seitenleiste/Scrollbar darf nicht in die Timeline einrasten.
+    // Der Timeline-Stopp wird nur über echte Wheel-/Trackpad-Ereignisse ausgelöst.
+    if(!desktop.matches){
       renderMobile();
     }
   },{passive:true});
@@ -2355,14 +2355,12 @@ if(journey&&timeline&&timelineItems.length&&timelineDots.length){
   },{passive:false});
 
   window.addEventListener('keydown',event=>{
-    if(!desktop.matches)return;
+    // Kein automatischer Timeline-Lock per Tastatur: Seiten-/Scrollbar-Navigation bleibt normal.
+    // Die geführte Timeline reagiert auf dem Desktop bewusst nur auf Mausrad/Trackpad.
+    if(!desktop.matches||!locked)return;
     const down=['ArrowDown','PageDown',' '].includes(event.key);
     const up=['ArrowUp','PageUp','Home'].includes(event.key);
     if(!down&&!up)return;
-    if(!locked){
-      enter();
-      if(!locked)return;
-    }
     event.preventDefault();
     move(down?1:-1);
   });
